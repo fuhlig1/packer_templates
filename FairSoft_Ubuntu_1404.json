@@ -43,5 +43,15 @@
         "cd && rm -rf /opt/fairsoft/source"
       ]
     }
+  ],
+  "post-processors": [
+    [
+      {
+        "type": "docker-import",
+        "repository": "fuhlig1/FairSoft_Ubuntu_1404",
+        "tag": "0.1"
+      },
+      "docker-push"
+    ]
   ]
 }
