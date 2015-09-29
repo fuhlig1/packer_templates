@@ -1,0 +1,47 @@
+{
+  "builders": [
+    {
+      "type": "docker",
+      "image": "ubuntu",
+      "export_path": "image.tar"
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "shell",
+      "environment_vars": [
+         "NO_PROXY=localhost,127.0.0.1,.gsi.de,140.181.0.0/16,10.0.0.0/8",
+         "no_proxy=localhost,127.0.0.1,.gsi.de,140.181.0.0/16,10.0.0.0/8",
+         "HTTP_PROXY=http://proxy.gsi.de:3128/",
+         "http_proxy=http://proxy.gsi.de:3128/",
+         "FTP_PROXY=ftp://proxy.gsi.de:3128/",
+         "ftp_proxy=ftp://proxy.gsi.de:3128/",
+         "RSYNC_PROXY=ftp://proxy.gsi.de:3128/",
+         "rsync_proxy=ftp://proxy.gsi.de:3128/",
+         "HTTPS_PROXY=https://proxy.gsi.de:3128/",
+         "https_proxy=https://proxy.gsi.de:3128/"
+      ],
+      "inline": [
+        "sleep 30",
+        "apt-get update",
+        "apt-get upgrade -y",
+        "apt-get install -y cmake cmake-data g++ gcc gfortran build-essential make patch sed libx11-dev libxft-dev libxext-dev libxpm-dev libxmu-dev libglu1-mesa-dev libgl1-mesa-dev ncurses-dev libcurl4-openssl-dev curl bzip2 gzip unzip tar subversion git xutils-dev flex bison lsb-release python-dev libc6-dev-i386 libxml2-dev wget libssl-dev",
+        "apt-get clean && apt-get autoremove",
+        "echo 'http-proxy-host = proxy.gsi.de' >> /etc/subversion/servers",
+        "echo 'http-proxy-port = 3128' >> /etc/subversion/servers",
+        "mkdir -p /opt/fairsoft/source",
+        "cd /opt/fairsoft/source",
+        "git clone https://github.com/FairRootGroup/FairSoft jul15p2",
+        "cd /opt/fairsoft/source/jul15p2",
+        "git checkout -b tag_jul15p2 jul15p2",
+        "sed -e \"s|build_root6=no|build_root6=no|g\" -i'' automatic.conf",
+        "sed -e \"s|\\$PWD/installation|/opt/fairsoft/jul15p2|g\" -i'' automatic.conf",
+        "sed -e \"s|build_python=no|build_python=yes|g\" -i'' automatic.conf",
+        "sed -e \"s|compiler=gcc|compiler=|g\" -i'' automatic.conf",
+        "sed -e \"s|compiler=|compiler=gcc|g\" -i'' automatic.conf",
+        "FC=gfortran ./configure.sh automatic.conf 2>&1 | tee Installation.log",
+        "cd && rm -rf /opt/fairsoft/source"
+      ]
+    }
+  ]
+}
