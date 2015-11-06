@@ -1,15 +1,16 @@
 {
   "builders": [
     {
-      "name": "ubuntu-desktop-14.04.amd64.virtualbox",
       "type": "virtualbox-iso",
       "guest_os_type": "Ubuntu_64",
       "iso_url": "http://releases.ubuntu.com/trusty/ubuntu-14.04.3-server-amd64.iso",
       "iso_checksum": "9e5fecc94b3925bededed0fdca1bd417",
       "iso_checksum_type": "md5",
+      "output_directory": "output_ubuntu_1404_desktop_amd64",
+      "vm_name": "packer-ubuntu1404-desktop-amd64",
       "ssh_username": "fairroot",
       "ssh_password": "FairRoot",
-      "ssh_timeout": "1000s",
+      "ssh_timeout": "10000s",
       "http_directory": "ubuntu/http",
       "boot_wait": "5s",
       "boot_command": [
@@ -31,7 +32,7 @@
       "type": "shell",
       "execute_command": "echo 'FairRoot' | sudo -S -E sh {{.Path}}",
       "scripts": [
-	"ubuntu/script/update.sh",
+	"ubuntu/script/update_desktop.sh",
 	"ubuntu/script/guestAddition.sh",
 	"ubuntu/script/cleanup.sh"
       ]

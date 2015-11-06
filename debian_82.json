@@ -1,0 +1,36 @@
+{
+  "builders": [
+    {
+      "type": "virtualbox-iso",
+      "guest_os_type": "Debian_64",
+      "iso_url": "http://cdimage.debian.org/debian-cd/8.2.0/amd64/iso-cd/debian-8.2.0-amd64-netinst.iso",
+      "iso_checksum": "923cd1bfbfa62d78aecaa92d919ee54a95c8fca834b427502847228cf06155e7243875f59279b0bf6bfd1b579cbe2f1bc80528a265dafddee9a9d2a197ef3806",
+      "iso_checksum_type": "sha512",
+      "output_directory": "output_debian-8-amd64",
+      "vm_name": "packer-debian8-server-amd64",
+      "ssh_username": "fairroot",
+      "ssh_password": "FairRoot",
+      "ssh_timeout": "10000s",
+      "http_directory": "debian/http",
+      "boot_wait": "5s",
+      "boot_command": [
+        "<esc><wait>",
+        "auto ",
+        "preseed/url=http://{{.HTTPIP}}:{{.HTTPPort}}/preseed_server.cfg",
+        "<enter>"
+      ],  
+      "shutdown_command": "echo 'FairRoot' | sudo -S shutdown -P now"
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "shell",
+      "execute_command": "echo 'FairRoot' | sudo -S -E sh {{.Path}}",
+      "scripts": [
+        "debian/script/update.sh",
+        "debian/script/guestAddition.sh",
+        "debian/script/cleanup.sh"
+      ]
+    }
+  ]  
+}    

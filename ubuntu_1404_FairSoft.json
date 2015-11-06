@@ -2,9 +2,10 @@
   "builders": [
     {
       "type": "virtualbox-ovf",
-      "source_path": "output-ubuntu-desktop-14.04.amd64.virtualbox/packer-ubuntu-desktop-14.04.amd64.ovf",
+      "source_path": "output_ubuntu_1404-amd64/packer-ubuntu1404-server-amd64.ovf",
       "ssh_username": "fairroot",
       "ssh_password": "FairRoot",
+      "ssh_timeout": "10000s",
       "shutdown_command": "echo 'FairRoot' | sudo -S shutdown -P now",
       "vboxmanage": [
         ["modifyvm", "{{.Name}}", "--memory", "2048"],
@@ -14,28 +15,12 @@
   ],
   "provisioners": [
     {
-      "type": "shell",
+     "type": "shell",
       "execute_command": "echo 'FairRoot' | sudo -S -E sh {{.Path}}",
-      "inline": [
-        "sleep 30",
-        "apt-get -y update",
-        "apt-get -y upgrade",
-        "apt-get -y install cmake cmake-data g++ gcc gfortran build-essential make patch sed libx11-dev libxft-dev libxext-dev libxpm-dev libxmu-dev libglu1-mesa-dev libgl1-mesa-dev ncurses-dev libcurl4-openssl-dev curl bzip2 gzip unzip tar subversion git xutils-dev flex bison lsb-release python-dev libc6-dev-i386 libxml2-dev wget libssl-dev",
-        "apt-get -y clean && apt-get -y autoremove",
-        "mkdir -p /opt/fairsoft/source",
-        "cd /opt/fairsoft/source",
-        "git clone https://github.com/FairRootGroup/FairSoft jul15p2",
-        "cd /opt/fairsoft/source/jul15p2",
-        "git checkout -b tag_jul15p2 jul15p2",
-        "sed -e \"s|build_root6=no|build_root6=no|g\" -i'' automatic.conf",
-        "sed -e \"s|\\$PWD/installation|/opt/fairsoft/jul15p2|g\" -i'' automatic.conf",
-        "sed -e \"s|build_python=no|build_python=no|g\" -i'' automatic.conf",
-        "sed -e \"s|compiler=gcc|compiler=|g\" -i'' automatic.conf",
-        "sed -e \"s|compiler=|compiler=gcc|g\" -i'' automatic.conf",
-        "FC=gfortran ./configure.sh automatic.conf 2>&1 | tee Installation.log",
-        "cd && rm -rf /opt/fairsoft/source"
+      "scripts": [
+        "ubuntu/script/FairSoft_Dependencies.sh",
+        "common/script/FairSoft.sh"
       ]
     }
   ]
 }
-
