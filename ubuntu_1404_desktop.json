@@ -32,9 +32,9 @@
       "type": "shell",
       "execute_command": "echo 'FairRoot' | sudo -S -E sh {{.Path}}",
       "scripts": [
-	"ubuntu/script/update_desktop.sh",
-	"ubuntu/script/guestAddition.sh",
-	"ubuntu/script/cleanup.sh"
+        "ubuntu/script/update_desktop.sh",
+        "ubuntu/script/guestAddition.sh",
+        "ubuntu/script/cleanup.sh"
       ]
     }
   ]  
