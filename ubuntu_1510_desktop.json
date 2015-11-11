@@ -18,8 +18,8 @@
       "iso_url": "http://releases.ubuntu.com/wily/ubuntu-15.10-server-amd64.iso",
       "iso_checksum": "86aa35a986eba6e5ad30e3d486d57efe6803ae7ea4859b0216953e9e62871131",
       "iso_checksum_type": "sha256",
-      "output_directory": "output_ubuntu_1510_server_amd64",
-      "vm_name": "packer-ubuntu1510-server-amd64",
+      "output_directory": "output_ubuntu_1510_desktop_amd64",
+      "vm_name": "packer-ubuntu1510-desktop-amd64",
       "ssh_username": "fairroot",
       "ssh_password": "FairRoot",
       "ssh_timeout": "10000s",
@@ -31,7 +31,7 @@
         "<bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs>",
         "<bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs>",
        "/install/vmlinuz ",
-        "preseed/url=http://{{.HTTPIP}}:{{.HTTPPort}}/preseed_server.cfg ",
+        "preseed/url=http://{{.HTTPIP}}:{{.HTTPPort}}/preseed_desktop.cfg ",
         "debian-installer=en_US auto locale=en_US kbd-chooser/method=us ",
         "hostname={{.Name}} ",
         "fb=false debconf/frontend=noninteractive ",
@@ -59,7 +59,7 @@
       ],
       "execute_command": "{{.Vars}} sudo -E sh {{.Path}}",
       "scripts": [
-        "ubuntu/script/update_server.sh",
+        "ubuntu/script/update_desktop.sh",
         "ubuntu/script/guestAddition.sh",
         "ubuntu/script/cleanup.sh"
       ]
