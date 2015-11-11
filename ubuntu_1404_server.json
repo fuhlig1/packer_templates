@@ -22,7 +22,7 @@
       "vm_name": "packer-ubuntu1404-server-amd64",
       "ssh_username": "fairroot",
       "ssh_password": "FairRoot",
-      "ssh_timeout": "1000s",
+      "ssh_timeout": "10000s",
       "http_directory": "ubuntu/http",
       "boot_wait": "5s",
       "boot_command": [
