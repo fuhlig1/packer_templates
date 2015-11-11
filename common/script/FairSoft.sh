@@ -5,11 +5,11 @@ echo "tag: $fairsoft_tag"
 
 if [ -n "$http_proxy" ]; then
   echo "Adding proxy to subversion config"
-  prot=$(echo $http_proxy | cut -f1 -d:)
   host=$(echo $http_proxy | cut -f2 -d:)
+  host=$(echo $host | sed -e"s#\/##g")
   port=$(echo $http_proxy | cut -f3 -d:)
   port=$(echo $port | sed -e"s#\/##g")
-  echo "http-proxy-host = $prot:$host" >> /etc/subversion/servers
+  echo "http-proxy-host = $host" >> /etc/subversion/servers
   echo "http-proxy-port = $port" >> /etc/subversion/servers
 fi
 
