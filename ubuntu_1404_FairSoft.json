@@ -1,14 +1,34 @@
 {
+  "variables": {
+    "HTTP_PROXY": "{{env `HTTP_PROXY`}}",
+    "HTTPS_PROXY": "{{env `HTTPS_PROXY`}}",
+    "FTP_PROXY": "{{env `FTP_PROXY`}}",
+    "RSYNC_PROXY": "{{env `RSYNC_PROXY`}}",
+    "NO_PROXY": "{{env `NO_PROXY`}}",
+    "http_proxy": "{{env `http_proxy`}}",
+    "https_proxy": "{{env `https_proxy`}}",
+    "ftp_proxy": "{{env `ftp_proxy`}}",
+    "rsync_proxy": "{{env `rsync_proxy`}}",
+    "no_proxy": "{{env `no_proxy`}}",
+    "fairsoft_tag": "jul15p2"
+  },
+  "builders": [
+    {
+      "type": "docker",
+      "image": "ubuntu:14.04",
+      "export_path": "image.tar"
+    }
+  ],
   "builders": [
     {
       "type": "virtualbox-ovf",
-      "source_path": "output_ubuntu_1404-amd64/packer-ubuntu1404-server-amd64.ovf",
+      "source_path": "output_ubuntu_1404_server_amd64/packer-ubuntu1404-server-amd64.ovf",
       "ssh_username": "fairroot",
       "ssh_password": "FairRoot",
       "ssh_timeout": "10000s",
-      "shutdown_command": "echo 'FairRoot' | sudo -S shutdown -P now",
+      "shutdown_command": "sudo shutdown -P now",
       "vboxmanage": [
-        ["modifyvm", "{{.Name}}", "--memory", "2048"],
+        ["modifyvm", "{{.Name}}", "--memory", "4096"],
         ["modifyvm", "{{.Name}}", "--cpus", "4"]
       ]
     }      
@@ -16,10 +36,24 @@
   "provisioners": [
     {
      "type": "shell",
-      "execute_command": "echo 'FairRoot' | sudo -S -E sh {{.Path}}",
+      "environment_vars": [
+         "HTTP_PROXY={{user `HTTP_PROXY`}}",
+         "HTTPS_PROXY={{user `HTTPS_PROXY`}}",
+         "FTP_PROXY={{user `FTP_PROXY`}}",
+         "RSYNC_PROXY={{user `RSYNC_PROXY`}}",
+         "NO_PROXY={{user `NO_PROXY`}}",
+         "http_proxy={{user `http_proxy`}}",
+         "https_proxy={{user `https_proxy`}}",
+         "ftp_proxy={{user `ftp_proxy`}}",
+         "rsync_proxy={{user `rsync_proxy`}}",
+         "no_proxy={{user `no_proxy`}}",
+         "fairsoft_tag={{user `fairsoft_tag`}}"
+      ],
+      "execute_command": "sudo {{.Vars}} sh {{.Path}}",
       "scripts": [
         "ubuntu/script/FairSoft_Dependencies.sh",
-        "common/script/FairSoft.sh"
+        "common/script/FairSoft.sh",
+        "ubuntu/script/cleanup.sh"
       ]
     }
   ]
