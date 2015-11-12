@@ -83,7 +83,7 @@
       "scripts": [
         "opensuse/script/update_server.sh",
         "opensuse/script/passwordless_sudo.sh",
-        "ubuntu/script/guestAddition.sh",
+        "common/script/guestAddition.sh",
         "opensuse/script/cleanup.sh"
       ]
     }
