@@ -55,6 +55,7 @@
       "execute_command": "echo 'FairRoot'|sudo -S -E sh '{{.Path}}'",
       "scripts": [
         "opensuse/script/update_server.sh",
+        "opensuse/script/passwordless_sudo.sh",
         "ubuntu/script/guestAddition.sh",
         "ubuntu/script/cleanup.sh"
       ]
