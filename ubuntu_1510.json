@@ -16,7 +16,7 @@
     {
       "type": "virtualbox-iso",
       "guest_os_type": "Ubuntu_64",
-      "iso_url": "http://releases.ubuntu.com/trusty/ubuntu-15.10-server-amd64.iso",
+      "iso_url": "http://releases.ubuntu.com/wily/ubuntu-15.10-server-amd64.iso",
       "iso_checksum": "86aa35a986eba6e5ad30e3d486d57efe6803ae7ea4859b0216953e9e62871131",
       "iso_checksum_type": "sha256",
       "output_directory": "output_ubuntu_1510_{{user `build_type`}}_amd64",
@@ -27,16 +27,19 @@
       "http_directory": "ubuntu/http",
       "boot_wait": "5s",
       "boot_command": [
-        "<esc><esc><enter><wait>",
+        "<enter><wait><f6><esc><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs>",
+        "<bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs>",
+        "<bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs>",
+        "<bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs>",
         "/install/vmlinuz ",
-        "preseed/url=http://{{.HTTPIP}}:{{.HTTPPort}}/preseed_{{user `build_type`}}.cfg ",
+        "preseed/url=http://{{.HTTPIP}}:{{.HTTPPort}}/preseed_server.cfg ",
         "debian-installer=en_US auto locale=en_US kbd-chooser/method=us ",
         "hostname={{.Name}} ",
         "fb=false debconf/frontend=noninteractive ",
         "keyboard-configuration/modelcode=SKIP keyboard-configuration/layout=USA ",
         "keyboard-configuration/variant=USA console-setup/ask_detect=false ",
         "initrd=/install/initrd.gz -- <enter> "
-      ],  
+      ],
       "shutdown_command": "echo 'FairRoot' | sudo -S shutdown -P now"
     }
   ],
