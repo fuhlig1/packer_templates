@@ -17,9 +17,7 @@
       "type": "docker",
       "image": "ubuntu:14.04",
       "export_path": "image.tar"
-    }
-  ],
-  "builders": [
+    },
     {
       "type": "virtualbox-ovf",
       "source_path": "output_ubuntu_1404_server_amd64/packer-ubuntu1404-server-amd64.ovf",

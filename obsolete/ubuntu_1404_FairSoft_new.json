@@ -16,7 +16,7 @@
   "builders": [
     {  
       "type": "docker",
-      "image": "ubuntu",
+      "image": "ubuntu:14.04",
       "export_path": "image.tar"
     }   
   ],
@@ -53,7 +53,7 @@
       "execute_command": "sudo -E sh {{.Path}}",
       "scripts": [
         "ubuntu/script/FairSoft_Dependencies.sh",
-        "common/script/FairSoft.sh {{user `fairsoft_tag`}}"
+        "common/script/FairSoft.sh"
       ]
     }
   ]
