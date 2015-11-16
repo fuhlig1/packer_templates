@@ -19,14 +19,14 @@
   "builders": [
     {
       "type": "docker",
-      "image": "debian:{{user `debian_version`}}
+      "image": "debian:{{user `debian_version`}}",
       "export_path": "debian_{{user `debian_version`}}_{{user `type`}}_FairSoft_{{user `fairsoft_tag`}}_amd64.tar"
     },
     {
       "type": "virtualbox-ovf",
       "output_directory": "output_debian_{{user `debian_version`}}_{{user `type`}}_FairSoft_{{user `fairsoft_tag`}}_amd64",
       "vm_name": "packer-debian{{user `debian_version`}}-{{user `type`}}-FairSoft-{{user `fairsoft_tag`}}-amd64",
-      "source_path": "output_debian_{{user `debian_version`}}_{{user `type`}}_amd64/packer-debian{{user `debian_version`}}-{{user `type`}}-amd64.ovf",
+      "source_path": "output_debian_{{user `debian_version`}}_{{user `type`}}_amd64/packer-debian-{{user `debian_version`}}-{{user `type`}}-amd64.ovf",
       "ssh_username": "fairroot",
       "ssh_password": "FairRoot",
       "ssh_timeout": "10000s",
