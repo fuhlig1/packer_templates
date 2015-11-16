@@ -21,10 +21,8 @@
     {
       "type": "docker",
       "image": "ubuntu:{{user `ubuntu_major`}}.{{user `ubuntu_minor`}}",
-      "export_path": "image.tar"
-    }
-  ],
-  "builders": [
+      "export_path": "ubuntu_{{user `ubuntu_major`}}{{user `ubuntu_minor`}}_{{user `type`}}_FairSoft_{{user `fairsoft_tag`}}_amd64.tar"
+    },
     {
       "type": "virtualbox-ovf",
       "output_directory": "output_ubuntu_{{user `ubuntu_major`}}{{user `ubuntu_minor`}}_{{user `type`}}_FairSoft_{{user `fairsoft_tag`}}_amd64",
