@@ -8,4 +8,5 @@ DEBIAN_FRONTEND=noninteractive apt-get -y install cmake cmake-data g++ gcc gfort
                    ncurses-dev libcurl4-openssl-dev curl bzip2 gzip unzip tar subversion git xutils-dev flex \
                    bison lsb-release python-dev libc6-dev-i386 libxml2-dev wget libssl-dev
 
-apt-get -y clean && apt-get -y autoremove
+DEBIAN_FRONTEND=noninteractive apt-get -y clean
+DEBIAN_FRONTEND=noninteractive apt-get -y autoremove
