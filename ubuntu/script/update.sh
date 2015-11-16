@@ -1,10 +1,10 @@
 #!/bin/sh
 
 # Update the box
-apt-get -y update
-apt-get -y upgrade
-apt-get -y install linux-headers-$(uname -r) 
+DEBIAN_FRONTEND=noninteractive apt-get -y update
+DEBIAN_FRONTEND=noninteractive apt-get -y upgrade
+DEBIAN_FRONTEND=noninteractive apt-get -y install linux-headers-$(uname -r) lsb_release
 
 if [ "$build_type" = "desktop" ]; then
-  apt-get -y install ubuntu-desktop
+  DEBIAN_FRONTEND=noninteractive apt-get -y install ubuntu-desktop
 fi

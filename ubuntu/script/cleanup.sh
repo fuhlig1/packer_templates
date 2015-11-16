@@ -1,8 +1,8 @@
 #!/bin/sh
 
 # Clean up
-apt-get -y autoremove
-apt-get -y clean
+DEBIAN_FRONTEND=noninteractive apt-get -y autoremove
+DEBIAN_FRONTEND=noninteractive apt-get -y clean
 
 # Remove temporary files
 rm -rf /tmp/*
