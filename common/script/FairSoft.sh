@@ -15,6 +15,11 @@ fi
 
 cat  /etc/subversion/servers
 
+if [ -d /opt/compiler/gcc ]; then
+  export PATH=/opt/compiler/gcc/bin:$PATH
+  export LD_LIBRARY_PATH=/opt/compiler/gcc/lib:$LD_LIBRARY_PATH
+fi
+
 mkdir -p /opt/fairsoft/source
 cd /opt/fairsoft/source
 
