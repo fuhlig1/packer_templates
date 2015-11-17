@@ -13,9 +13,9 @@
     "fairsoft_tag": "jul15p2",
     "ubuntu_major": "14",
     "ubuntu_minor": "04",
-    "type": "desktop",
-    "memory": "8192",
-    "cpus": "8"
+    "type": "server",
+    "memory": "4096",
+    "cpus": "4"
   },
   "builders": [
     {
@@ -57,6 +57,7 @@
       "execute_command": "sudo {{.Vars}} sh {{.Path}}",
       "scripts": [
         "ubuntu/script/FairSoft_Dependencies.sh",
+        "common/script/install_gcc.sh",
         "common/script/FairSoft.sh",
         "ubuntu/script/cleanup.sh"
       ]
