@@ -20,13 +20,24 @@ if [ -d /opt/compiler/gcc ]; then
   export LD_LIBRARY_PATH=/opt/compiler/gcc/lib:$LD_LIBRARY_PATH
 fi
 
+set -xv
+
 mkdir -p /opt/fairsoft/source
 cd /opt/fairsoft/source
 
 git clone https://github.com/FairRootGroup/FairSoft $fairsoft_tag
 
 cd /opt/fairsoft/source/$fairsoft_tag
-git checkout -b tag_$fairsoft_tag $fairsoft_tag
+
+#check if it is tag or not
+result=$(git tag -l | grep "^$fairsoft_tag$")
+if [ $? -eq 0 ]; then # it is a tag
+  git checkout -b tag_$fairsoft_tag $fairsoft_tag
+else
+  git checkout $fairsoft_tag
+fi
+
+set +xv
 
 sed -e "s|build_root6=no|build_root6=no|g" -i'' automatic.conf
 sed -e "s|\$PWD/installation|/opt/fairsoft/$fairsoft_tag|g" -i'' automatic.conf
