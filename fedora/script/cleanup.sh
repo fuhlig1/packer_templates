@@ -1,8 +1,8 @@
 #!/bin/bash
 
 yum -y autoremove  
-yum clean all
-yum history new
+yum -y clean all
+yum -y history new
 truncate -c -s 0 /var/log/yum.log
 
 # Remove temporary files

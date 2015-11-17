@@ -1,10 +1,10 @@
 #!/bin/sh
 
 # Update the box
-yum update
-yum install linux-headers-$(uname -r) redhat-lsb
+yum -y update
+yum -y install linux-headers-$(uname -r) redhat-lsb-core
 
 if [ "$build_type" = "desktop" ]; then
-  yum install @xfce
+  yum -y install @xfce
 fi
   
