@@ -17,7 +17,12 @@ cat  /etc/subversion/servers
 
 if [ -d /opt/compiler/gcc ]; then
   export PATH=/opt/compiler/gcc/bin:$PATH
-  export LD_LIBRARY_PATH=/opt/compiler/gcc/lib:$LD_LIBRARY_PATH
+  bit=$(uname -m)
+  if [ "$bit" = "x86_64" ]; then
+    export LD_LIBRARY_PATH=/opt/compiler/gcc/lib64:/opt/compiler/gcc/lib:$LD_LIBRARY_PATH
+  else
+    export LD_LIBRARY_PATH=/opt/compiler/gcc/lib32:/opt/compiler/gcc/lib:$LD_LIBRARY_PATH
+  fi
 fi
 
 set -xv
