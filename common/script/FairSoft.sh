@@ -9,11 +9,12 @@ if [ -n "$http_proxy" ]; then
   host=$(echo $host | sed -e"s#\/##g")
   port=$(echo $http_proxy | cut -f3 -d:)
   port=$(echo $port | sed -e"s#\/##g")
-  echo "http-proxy-host = $host" >> /etc/subversion/servers
-  echo "http-proxy-port = $port" >> /etc/subversion/servers
+  svn ls https://subversion.gsi.de/cbmsoft/cbmroot
+  echo "http-proxy-host = $host" >> $HOME/.subversion/servers
+  echo "http-proxy-port = $port" >> $HOME/.subversion/servers
 fi
 
-cat  /etc/subversion/servers
+cat  $HOME/.subversion/servers
 
 if [ -d /opt/compiler/gcc ]; then
   export PATH=/opt/compiler/gcc/bin:$PATH
@@ -54,6 +55,6 @@ FC=gfortran ./configure.sh automatic.conf 2>&1 | tee Installation.log
 cd && rm -rf /opt/fairsoft/source
 
 if [ -n "$http_proxy" ]; then
-  sed '/^http-proxy-host/d' -i'' /etc/subversion/servers
-  sed '/^http-proxy-port/d' -i'' /etc/subversion/servers
+  sed '/^http-proxy-host/d' -i'' $HOME/.subversion/servers
+  sed '/^http-proxy-port/d' -i'' $HOME/.subversion/servers
 fi
