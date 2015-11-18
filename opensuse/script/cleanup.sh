@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # Clean up
-zypper clean -a
+zypper --non-interactive clean -a
 rm -f /etc/zypp/locks
 
 # Remove temporary files
