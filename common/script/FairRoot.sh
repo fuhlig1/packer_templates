@@ -29,7 +29,7 @@ else
   git checkout $fairroot_tag
 fi
 
-distributor=$(lsb_release -is)
+distributor=$(lsb_release -is | cut -f1 -d' ')
 release=$(lsb_release -rs)
 flavour=$distributor$release
 ccomp=$(/opt/fairsoft/$fairsoft_tag/bin/fairsoft-config --cc)
@@ -45,6 +45,12 @@ export GIT_BRANCH=$fairroot_tag
 export BUILDDIR=/tmp/build_fairroot_${fairroot_tag}_fs_$fairsoft_tag
 export SOURCEDIR=/opt/fairroot/source/$fairroot_tag
 EOF
+
+if [ -d /opt/compiler/gcc ]; then
+cat >> Dart.cfg << EOF
+export EXTRA_FLAGS="-DUSE_PATH_INFO=TRUE"
+EOF
+fi
 
 cat Dart.cfg
 
