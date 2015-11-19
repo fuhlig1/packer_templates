@@ -1,0 +1,9 @@
+{
+ "type": "server",
+ "fairsoft_tag": "RC_nov15", 
+ "fairroot_tag": "RC_v-15.11",
+ "distribution": "debian",
+ "major_version": "7", 
+ "cpus": "8",
+ "memory": "8192"
+}

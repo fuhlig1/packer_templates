@@ -1,0 +1,10 @@
+{
+ "type": "server",
+ "fairsoft_tag": "RC_nov15", 
+ "fairroot_tag": "RC_v-15.11",
+ "distribution": "ubuntu",
+ "major_version": "15", 
+ "minor_version": "10", 
+ "cpus": "8",
+ "memory": "8192"
+}
