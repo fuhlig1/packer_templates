@@ -24,9 +24,8 @@
       "http_directory": "fedora/http",
       "boot_wait": "5s",
       "boot_command": [
-        "<esc>",
-        "<wait>",
-        "linux proxy={{user `https_proxy`}} noverifyssl inst.ks=https://redmine.cbm.gsi.de/attachments/download/376/anakonda-ks.cfg biosdevname=0 net.ifnames=0",
+        "<tab> ",
+        "linux proxy={{user `https_proxy`}} noverifyssl inst.ks=https://redmine.cbm.gsi.de/attachments/download/378/anakonda-ks-23.cfg biosdevname=0 net.ifnames=0",
         "<enter>"
       ],
       "ssh_wait_timeout": "60m",
