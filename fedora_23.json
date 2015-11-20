@@ -15,6 +15,28 @@
   "builders": [
     {
       "type": "virtualbox-iso",
+      "name": "normal",
+      "guest_os_type": "Fedora_64",
+      "iso_url": "https://download.fedoraproject.org/pub/fedora/linux/releases/23/Server/x86_64/iso/Fedora-Server-netinst-x86_64-23.iso",
+      "iso_checksum": "32e0a15a1c71d0e2fd36a0af5b67a3b3af82976d2dfca0aefcb90d42f2ae6844",
+      "iso_checksum_type": "sha256",
+      "output_directory": "output_fedora_23_{{user `build_type`}}_amd64",
+      "vm_name": "packer-fedora-23-{{user `build_type`}}-amd64",
+      "http_directory": "fedora/http",
+      "boot_wait": "5s",
+      "boot_command": [
+        "<tab> ",
+        "linux inst.ks=http://{{.HTTPIP}}:{{.HTTPPort}}/anakonda-ks-23.cfg biosdevname=0 net.ifnames=0",
+        "<enter>"
+      ],
+      "ssh_wait_timeout": "60m",
+      "ssh_username": "fairroot",
+      "ssh_password": "FairRoot",
+      "shutdown_command": "sudo systemctl poweroff"
+    },
+    {
+      "type": "virtualbox-iso",
+      "name": "proxy",
       "guest_os_type": "Fedora_64",
       "iso_url": "https://download.fedoraproject.org/pub/fedora/linux/releases/23/Server/x86_64/iso/Fedora-Server-netinst-x86_64-23.iso",
       "iso_checksum": "32e0a15a1c71d0e2fd36a0af5b67a3b3af82976d2dfca0aefcb90d42f2ae6844",
