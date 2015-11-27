@@ -4,6 +4,14 @@ set -xv
 
 echo "tag: $fairroot_tag"
 
+distribution=$(lsb_release -is)
+version=$(lsb_release -rs | cut -f1 -d.)
+
+if [ "$distribution$version" = "ScientificCERNSLC6" ]; then
+  source scl_source enable devtoolset-3
+  source scl_source enable python27
+fi
+
 if [ -d /opt/compiler/gcc ]; then
   export PATH=/opt/compiler/gcc/bin:$PATH
   bit=$(uname -m)

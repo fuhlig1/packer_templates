@@ -1,5 +1,14 @@
 #!/bin/bash
 
+
+distribution=$(lsb_release -is)
+version=$(lsb_release -rs | cut -f1 -d.)
+
+if [ "$distribution$version" = "ScientificCERNSLC6" ]; then
+  source scl_source enable devtoolset-3
+  source scl_source enable python27
+fi
+  
 gcc_major=$(gcc -dumpversion | cut -d. -f1)
 gcc_minor=$(gcc -dumpversion | cut -d. -f2)
 
