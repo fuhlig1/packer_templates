@@ -32,7 +32,7 @@
       "ssh_wait_timeout": "60m",
       "ssh_username": "fairroot",
       "ssh_password": "FairRoot",
-      "shutdown_command": "sudo shutdown -h now"
+      "shutdown_command": "sudo systemctl poweroff"
     },
     {
       "type": "virtualbox-iso",
@@ -53,7 +53,7 @@
       "ssh_wait_timeout": "60m",
       "ssh_username": "fairroot",
       "ssh_password": "FairRoot",
-      "shutdown_command": "sudo shutdown -h now"
+      "shutdown_command": "sudo systemctl poweroff"
     }
   ],
   "provisioners": [
