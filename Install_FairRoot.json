@@ -11,20 +11,22 @@
     "rsync_proxy": "{{env `rsync_proxy`}}",
     "no_proxy": "{{env `no_proxy`}}",
     "fairsoft_tag": "jul15p2",
+    "root_version": "5",
     "fairroot_tag": "v-15.07a",
     "distribution": "debian",
     "major_version": "7",
     "minor_version": "",
     "type": "server",
     "memory": "4096",
-    "cpus": "4"
+    "cpus": "4",
+    "system": "amd64"
   },
   "builders": [
     {
       "type": "virtualbox-ovf",
-      "output_directory": "output_{{user `distribution`}}_{{user `major_version`}}{{user `minor_version`}}_{{user `type`}}_FairSoft_{{user `fairsoft_tag`}}_FairRoot_{{user `fairroot_tag`}}_amd64",
-      "vm_name": "packer-{{user `distribution`}}{{user `major_version`}}{{user `minor_version`}}-{{user `type`}}-FairSoft-{{user `fairsoft_tag`}}-FairRoot-{{user `fairroot_tag`}}-amd64",
-      "source_path": "output_{{user `distribution`}}_{{user `major_version`}}{{user `minor_version`}}_{{user `type`}}_FairSoft_{{user `fairsoft_tag`}}_amd64/packer-{{user `distribution`}}{{user `major_version`}}{{user `minor_version`}}-{{user `type`}}-FairSoft-{{user `fairsoft_tag`}}-amd64.ovf",
+      "output_directory": "output_{{user `distribution`}}_{{user `major_version`}}{{user `minor_version`}}_{{user `type`}}_FairSoft_{{user `fairsoft_tag`}}_root{{user `root_version`}}_FairRoot_{{user `fairroot_tag`}}_{{user `system`}}",
+      "vm_name": "packer-{{user `distribution`}}{{user `major_version`}}{{user `minor_version`}}-{{user `type`}}-FairSoft-{{user `fairsoft_tag`}}-root{{user `root_version`}}-FairRoot-{{user `fairroot_tag`}}-{{user `system`}}",
+      "source_path": "output_{{user `distribution`}}_{{user `major_version`}}{{user `minor_version`}}_{{user `type`}}_FairSoft_{{user `fairsoft_tag`}}_root{{user `root_version`}}_{{user `system`}}/packer-{{user `distribution`}}{{user `major_version`}}{{user `minor_version`}}-{{user `type`}}-FairSoft-{{user `fairsoft_tag`}}-root{{user `root_version`}}-{{user `system`}}.ovf",
       "ssh_username": "fairroot",
       "ssh_password": "FairRoot",
       "ssh_timeout": "10000s",

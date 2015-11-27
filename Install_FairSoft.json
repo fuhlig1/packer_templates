@@ -11,24 +11,26 @@
     "rsync_proxy": "{{env `rsync_proxy`}}",
     "no_proxy": "{{env `no_proxy`}}",
     "fairsoft_tag": "jul15p2",
+    "root_version": "5",
     "distribution": "debian",
     "major_version": "7",
     "minor_version": "",
     "type": "server",
     "memory": "4096",
-    "cpus": "4"
+    "cpus": "4",
+    "system": "amd64"
   },
   "builders": [
     {
       "type": "docker",
       "image": "{{user `distribution`}}:{{user `major_version`}}{{user `minor_version`}}",
-      "export_path": "{{user `distribution`}}_{{user `major_version`}}{{user `minor_version`}}_{{user `type`}}_FairSoft_{{user `fairsoft_tag`}}_amd64.tar"
+      "export_path": "{{user `distribution`}}_{{user `major_version`}}{{user `minor_version`}}_{{user `type`}}_FairSoft_{{user `fairsoft_tag`}}_root{{user `root_version`}}_{{user `system`}}.tar"
     },
     {
       "type": "virtualbox-ovf",
-      "output_directory": "output_{{user `distribution`}}_{{user `major_version`}}{{user `minor_version`}}_{{user `type`}}_FairSoft_{{user `fairsoft_tag`}}_amd64",
-      "vm_name": "packer-{{user `distribution`}}{{user `major_version`}}{{user `minor_version`}}-{{user `type`}}-FairSoft-{{user `fairsoft_tag`}}-amd64",
-      "source_path": "output_{{user `distribution`}}_{{user `major_version`}}{{user `minor_version`}}_{{user `type`}}_amd64/packer-{{user `distribution`}}-{{user `major_version`}}{{user `minor_version`}}-{{user `type`}}-amd64.ovf",
+      "output_directory": "output_{{user `distribution`}}_{{user `major_version`}}{{user `minor_version`}}_{{user `type`}}_FairSoft_{{user `fairsoft_tag`}}_root{{user `root_version`}}_{{user `system`}}",
+      "vm_name": "packer-{{user `distribution`}}{{user `major_version`}}{{user `minor_version`}}-{{user `type`}}-FairSoft-{{user `fairsoft_tag`}}-root{{user `root_version`}}-{{user `system`}}",
+      "source_path": "base_images/output_{{user `distribution`}}_{{user `major_version`}}{{user `minor_version`}}_{{user `type`}}_{{user `system`}}/packer-{{user `distribution`}}-{{user `major_version`}}{{user `minor_version`}}-{{user `type`}}-{{user `system`}}.ovf",
       "ssh_username": "fairroot",
       "ssh_password": "FairRoot",
       "ssh_timeout": "10000s",
@@ -53,7 +55,8 @@
          "ftp_proxy={{user `ftp_proxy`}}",
          "rsync_proxy={{user `rsync_proxy`}}",
          "no_proxy={{user `no_proxy`}}",
-         "fairsoft_tag={{user `fairsoft_tag`}}"
+         "fairsoft_tag={{user `fairsoft_tag`}}",
+         "root_version={{user `root_version`}}"
       ],
       "execute_command": "sudo {{.Vars}} sh {{.Path}}",
       "scripts": [
