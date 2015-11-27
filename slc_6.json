@@ -39,7 +39,7 @@
       "name": "proxy",
       "guest_os_type": "RedHat_64",
       "iso_url": "http://linux.web.cern.ch/linux/scientific6/docs/repository/cern/slc6X/x86_64/images/boot.iso",
-      "iso_checksum": "62c455e528e0340596c131fae095ef5f",
+      "iso_checksum": "53de246f9d5e61ede045d04388b2c26f",
       "iso_checksum_type": "md5",
       "output_directory": "base_images/output_slc_6_{{user `build_type`}}_amd64",
       "vm_name": "packer-slc-6-{{user `build_type`}}-amd64",
