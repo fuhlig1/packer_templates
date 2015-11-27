@@ -1,0 +1,11 @@
+{
+ "type": "server",
+ "fairsoft_tag": "jul15_patches", 
+ "fairroot_tag": "RC_v-15.11",
+ "distribution": "opensuse",
+ "major_version": "13", 
+ "minor_version": "1", 
+ "cpus": "4",
+ "memory": "4096",
+ "system": "i386"
+}
