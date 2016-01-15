@@ -64,4 +64,9 @@ cat Dart.cfg
 
 ./Dart.sh Experimental Dart.cfg
 
+cd /tmp/build_fairroot_${fairroot_tag}_fs_$fairsoft_tag
+sed -e "s#CMAKE_INSTALL_PREFIX:PATH=/usr/local#CMAKE_INSTALL_PREFIX:PATH=/opt/fairroot/${fairroot_tag}_fs_$fairsoft_tag#" -i'' CMakeCache.txt
+. ./config.sh
+make install -j$(nproc)
+
 set +xv

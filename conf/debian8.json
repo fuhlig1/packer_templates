@@ -1,9 +1,11 @@
 {
- "type": "desktop",
- "fairsoft_tag": "RC_nov15", 
- "fairroot_tag": "RC_v-15.11",
+ "type": "server",
+ "fairsoft_tag": "jul15p3", 
+ "fairroot_tag": "v-15.07a",
+ "root_version": "6",
  "distribution": "debian",
  "major_version": "8", 
  "cpus": "8",
- "memory": "8192"
+ "memory": "8192",
+ "system": "amd64"
 }
