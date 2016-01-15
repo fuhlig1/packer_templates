@@ -19,7 +19,7 @@
       "iso_url": "http://releases.ubuntu.com/trusty/ubuntu-14.04.3-server-amd64.iso",
       "iso_checksum": "9e5fecc94b3925bededed0fdca1bd417",
       "iso_checksum_type": "md5",
-      "output_directory": "output_ubuntu_1404_{{user `build_type`}}_amd64",
+      "output_directory": "base_images/output_ubuntu_1404_{{user `build_type`}}_amd64",
       "vm_name": "packer-ubuntu1404-{{user `build_type`}}-amd64",
       "ssh_username": "fairroot",
       "ssh_password": "FairRoot",

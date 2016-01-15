@@ -1,10 +1,12 @@
 {
  "type": "server",
- "fairsoft_tag": "RC_nov15", 
- "fairroot_tag": "RC_v-15.11",
+ "fairsoft_tag": "nov15p1", 
+ "fairroot_tag": "v-15.11",
+ "root_version": "6",
  "distribution": "ubuntu",
  "major_version": "14", 
  "minor_version": "04", 
  "cpus": "8",
- "memory": "8192"
+ "memory": "8192",
+ "system": "amd64"
 }

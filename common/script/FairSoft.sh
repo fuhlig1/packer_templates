@@ -58,7 +58,7 @@ if [ $root_version -eq 5 ]; then
 else
   sed -e "s|build_root6=no|build_root6=yes|g" -i'' automatic.conf
 fi
-sed -e "s|\$PWD/installation|/opt/fairsoft/$fairsoft_tag|g" -i'' automatic.conf
+sed -e "s|\$PWD/installation|/opt/fairsoft/\${fairsoft_tag}_root\${root_version}|g" -i'' automatic.conf
 sed -e "s|build_python=no|build_python=no|g" -i'' automatic.conf
 sed -e "s|compiler=gcc|compiler=|g" -i'' automatic.conf
 sed -e "s|compiler=|compiler=gcc|g" -i'' automatic.conf
