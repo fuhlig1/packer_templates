@@ -1,6 +1,8 @@
 #!/bin/bash
 
-fpm -s dir -t deb -n fairsoft_nov15p1 \
+set -xv
+
+fpm -s dir -t deb -n fairsoft_${fairsoft_tag}_root${root_version} \
 -d "cmake" \
 -d "cmake-data" \
 -d "g++" \
@@ -38,4 +40,6 @@ fpm -s dir -t deb -n fairsoft_nov15p1 \
 -d "automake" \
 -d "autoconf" \
 -d "libtool" \
- /opt/fairsoft
+ /opt/fairsoft/${fairsoft_tag}_root${root_version}
+
+set +xv
