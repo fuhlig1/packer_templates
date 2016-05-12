@@ -16,7 +16,7 @@
     {
       "type": "virtualbox-iso",
       "name": "normal",
-      "output_directory": "output_opensuse_131_{{user `build_type`}}_amd64",
+      "output_directory": "base_images/output_opensuse_131_{{user `build_type`}}_amd64",
       "vm_name": "packer-opensuse-131-{{user `build_type`}}-amd64",
       "boot_command": [
         "<esc><enter><wait>",
@@ -40,7 +40,7 @@
     {
       "type": "virtualbox-iso",
       "name": "normal_i386",
-      "output_directory": "output_opensuse_131_{{user `build_type`}}_i386",
+      "output_directory": "base_images/output_opensuse_131_{{user `build_type`}}_i386",
       "vm_name": "packer-opensuse-131-{{user `build_type`}}-i386",
       "boot_command": [
         "<esc><enter><wait>",

@@ -18,7 +18,7 @@
       "name": "normal",
       "guest_os_type": "RedHat_64",
       "iso_url": "http://linuxsoft.cern.ch/cern/centos/7/os/x86_64/images/boot.iso",
-      "iso_checksum": "82de2ca8258e03356100d5177034416b",
+      "iso_checksum": "f4947c1d80a289a29b24096f86768ea3",
       "iso_checksum_type": "md5",
       "output_directory": "base_images/output_slc_7_{{user `build_type`}}_amd64",
       "vm_name": "packer-slc-7-{{user `build_type`}}-amd64",

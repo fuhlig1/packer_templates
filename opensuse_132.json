@@ -16,7 +16,7 @@
     {
       "type": "virtualbox-iso",
       "name": "normal",
-      "output_directory": "output_opensuse_132_{{user `build_type`}}_amd64",
+      "output_directory": "base_images/output_opensuse_132_{{user `build_type`}}_amd64",
       "vm_name": "packer-opensuse132-{{user `build_type`}}-amd64",
       "boot_command": [
         "<esc><enter><wait>",
@@ -40,7 +40,7 @@
     {
       "type": "virtualbox-iso",
       "name": "proxy",
-      "output_directory": "output_opensuse_132_{{user `build_type`}}_amd64",
+      "output_directory": "base_images/output_opensuse_132_{{user `build_type`}}_amd64",
       "vm_name": "packer-opensuse132-{{user `build_type`}}-amd64",
       "boot_command": [
         "<esc><enter><wait>",
