@@ -62,6 +62,10 @@ sed -e "s|\$PWD/installation|/opt/fairsoft/\${fairsoft_tag}_root\${root_version}
 sed -e "s|build_python=no|build_python=no|g" -i'' automatic.conf
 sed -e "s|compiler=gcc|compiler=|g" -i'' automatic.conf
 sed -e "s|compiler=|compiler=gcc|g" -i'' automatic.conf
+sed -e "s|debug=yes|debug=no|g" -i'' automatic.conf
+sed -e "s|optimize=no|optimize=yes|g" -i'' automatic.conf
+
+cat automatic.conf
 
 FC=gfortran ./configure.sh automatic.conf 2>&1 | tee Installation.log
 cd && rm -rf /opt/fairsoft/source
