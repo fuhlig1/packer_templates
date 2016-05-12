@@ -1,9 +1,11 @@
 {
  "type": "server",
- "fairsoft_tag": "RC_nov15", 
- "fairroot_tag": "RC_v-15.11",
+ "fairsoft_tag": "RC_may16", 
+ "fairroot_tag": "dev",
+ "root_version": "6",
  "distribution": "fedora",
  "major_version": "21", 
- "cpus": "8",
- "memory": "8192"
+ "cpus": "4",
+ "memory": "4096",
+ "system": "amd64"
 }

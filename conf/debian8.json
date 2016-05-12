@@ -1,11 +1,11 @@
 {
  "type": "server",
- "fairsoft_tag": "jul15p3", 
- "fairroot_tag": "v-15.07a",
+ "fairsoft_tag": "RC_may16", 
+ "fairroot_tag": "dev",
  "root_version": "6",
  "distribution": "debian",
  "major_version": "8", 
- "cpus": "8",
- "memory": "8192",
+ "cpus": "4",
+ "memory": "4096",
  "system": "amd64"
 }

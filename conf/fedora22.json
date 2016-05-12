@@ -3,9 +3,8 @@
  "fairsoft_tag": "RC_may16", 
  "fairroot_tag": "dev",
  "root_version": "6",
- "distribution": "ubuntu",
- "major_version": "14", 
- "minor_version": "04", 
+ "distribution": "fedora",
+ "major_version": "22", 
  "cpus": "4",
  "memory": "4096",
  "system": "amd64"

@@ -4,7 +4,7 @@
  "fairroot_tag": "dev",
  "root_version": "6",
  "distribution": "ubuntu",
- "major_version": "14", 
+ "major_version": "16", 
  "minor_version": "04", 
  "cpus": "4",
  "memory": "4096",
