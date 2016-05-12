@@ -30,7 +30,7 @@
       "type": "virtualbox-ovf",
       "output_directory": "fairsoft_images/output_{{user `distribution`}}_{{user `major_version`}}{{user `minor_version`}}_{{user `type`}}_FairSoft_{{user `fairsoft_tag`}}_root{{user `root_version`}}_{{user `system`}}",
       "vm_name": "packer-{{user `distribution`}}{{user `major_version`}}{{user `minor_version`}}-{{user `type`}}-FairSoft-{{user `fairsoft_tag`}}-root{{user `root_version`}}-{{user `system`}}",
-      "source_path": "base_images/output_{{user `distribution`}}_{{user `major_version`}}{{user `minor_version`}}_{{user `type`}}_{{user `system`}}/packer-{{user `distribution`}}{{user `major_version`}}{{user `minor_version`}}-{{user `type`}}-{{user `system`}}.ovf",
+      "source_path": "base_images/output_{{user `distribution`}}_{{user `major_version`}}{{user `minor_version`}}_{{user `type`}}_{{user `system`}}/packer-{{user `distribution`}}-{{user `major_version`}}{{user `minor_version`}}-{{user `type`}}-{{user `system`}}.ovf",
       "ssh_username": "fairroot",
       "ssh_password": "FairRoot",
       "ssh_timeout": "10000s",
