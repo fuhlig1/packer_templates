@@ -20,7 +20,7 @@
       "iso_checksum": "b8b172cbdf04f5ff8adc8c2c1b4007ccf66f00fc6a324a6da6eba67de71746f6",
       "iso_checksum_type": "sha256",
       "output_directory": "base_images/output_ubuntu_1604_{{user `build_type`}}_amd64",
-      "vm_name": "packer-ubuntu1604-{{user `build_type`}}-amd64",
+      "vm_name": "packer-ubuntu-1604-{{user `build_type`}}-amd64",
       "ssh_username": "fairroot",
       "ssh_password": "FairRoot",
       "ssh_timeout": "10000s",

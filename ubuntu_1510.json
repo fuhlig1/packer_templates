@@ -20,7 +20,7 @@
       "iso_checksum": "86aa35a986eba6e5ad30e3d486d57efe6803ae7ea4859b0216953e9e62871131",
       "iso_checksum_type": "sha256",
       "output_directory": "base_images/output_ubuntu_1510_{{user `build_type`}}_amd64",
-      "vm_name": "packer-ubuntu1510-{{user `build_type`}}-amd64",
+      "vm_name": "packer-ubuntu-1510-{{user `build_type`}}-amd64",
       "ssh_username": "fairroot",
       "ssh_password": "FairRoot",
       "ssh_timeout": "10000s",

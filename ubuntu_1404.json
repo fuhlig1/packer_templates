@@ -20,7 +20,7 @@
       "iso_checksum": "07e4bb5569814eab41fafac882ba127893e3ff0bdb7ec931c9b2d040e3e94e7a",
       "iso_checksum_type": "sha256",
       "output_directory": "base_images/output_ubuntu_1404_{{user `build_type`}}_amd64",
-      "vm_name": "packer-ubuntu1404-{{user `build_type`}}-amd64",
+      "vm_name": "packer-ubuntu-1404-{{user `build_type`}}-amd64",
       "ssh_username": "fairroot",
       "ssh_password": "FairRoot",
       "ssh_timeout": "10000s",
