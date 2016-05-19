@@ -22,7 +22,7 @@
         "<esc><enter><wait>",
         "linux netdevice=enp0s3 netsetup=dhcp<wait>",
         " install=http://download.opensuse.org/distribution/13.2/repo/oss/ insecure=1<wait>",
-        " lang=en_US autoyast=http://{{.HTTPIP}}:{{.HTTPPort}}/preseed.xml<wait>",
+        " lang=en_US autoyast=http://{{.HTTPIP}}:{{.HTTPPort}}/autoinst.xml<wait>",
         " textmode=1<wait>",
         "<enter><wait>"
       ],

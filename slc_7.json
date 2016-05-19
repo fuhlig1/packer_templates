@@ -21,7 +21,7 @@
       "iso_checksum": "f4947c1d80a289a29b24096f86768ea3",
       "iso_checksum_type": "md5",
       "output_directory": "base_images/output_slc_7_{{user `build_type`}}_amd64",
-      "vm_name": "packer-slc-7-{{user `build_type`}}-amd64",
+      "vm_name": "packer-slc7-{{user `build_type`}}-amd64",
       "http_directory": "slc/http",
       "boot_wait": "5s",
       "boot_command": [
