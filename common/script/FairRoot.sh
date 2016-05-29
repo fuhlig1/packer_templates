@@ -40,17 +40,17 @@ fi
 distributor=$(lsb_release -is | cut -f1 -d' ')
 release=$(lsb_release -rs)
 flavour=$distributor$release
-ccomp=$(/opt/fairsoft/$fairsoft_tag/bin/fairsoft-config --cc)
-cppcomp=$(/opt/fairsoft/$fairsoft_tag/bin/fairsoft-config --cxx)
+ccomp=$(/opt/fairsoft/${fairsoft_tag}_root${root_version}/bin/fairsoft-config --cc)
+cppcomp=$(/opt/fairsoft/${fairsoft_tag}_root${root_version}/bin/fairsoft-config --cxx)
 
 cat > Dart.cfg << EOF
 export LINUX_FLAVOUR=$flavour
-export FAIRSOFT_VERSION=$fairsoft_tag
-export SIMPATH=/opt/fairsoft/$fairsoft_tag
+export FAIRSOFT_VERSION=${fairsoft_tag}_root${root_version}
+export SIMPATH=/opt/fairsoft/${fairsoft_tag}_root${root_version}
 export CC=$ccomp
 export CXX=$cppcomp
 export GIT_BRANCH=$fairroot_tag
-export BUILDDIR=/tmp/build_fairroot_${fairroot_tag}_fs_$fairsoft_tag
+export BUILDDIR=/tmp/build_fairroot_${fairroot_tag}_fs_${fairsoft_tag}_root${root_version}
 export SOURCEDIR=/opt/fairroot/source/$fairroot_tag
 EOF
 
@@ -64,8 +64,9 @@ cat Dart.cfg
 
 ./Dart.sh Experimental Dart.cfg
 
-cd /tmp/build_fairroot_${fairroot_tag}_fs_$fairsoft_tag
-sed -e "s#CMAKE_INSTALL_PREFIX:PATH=/usr/local#CMAKE_INSTALL_PREFIX:PATH=/opt/fairroot/${fairroot_tag}_fs_$fairsoft_tag#" -i'' CMakeCache.txt
+#cd /tmp/build_fairroot_${fairroot_tag}_fs_$fairsoft_tag
+cd /tmp/build_fairroot_${fairroot_tag}_fs_${fairsoft_tag}_root${root_version}
+sed -e "s#CMAKE_INSTALL_PREFIX:PATH=/usr/local#CMAKE_INSTALL_PREFIX:PATH=/opt/fairroot/${fairroot_tag}_fs_${fairsoft_tag}_root${root_version}#" -i'' CMakeCache.txt
 . ./config.sh
 make install -j$(nproc)
 
