@@ -2,6 +2,10 @@
 
 set -xv
 
+# which shell is used
+ps -p $$
+echo $SHELL
+
 echo "tag: $fairroot_tag"
 
 distribution=$(lsb_release -is)
@@ -25,7 +29,7 @@ fi
 mkdir -p /opt/fairroot/source
 cd /opt/fairroot/source
 
-git clone https://github.com/FairRootGroup/FairRoot $fairroot_tag
+git clone https://github.com/fuhlig1/FairRoot $fairroot_tag
 
 cd /opt/fairroot/source/$fairroot_tag
 
@@ -51,6 +55,7 @@ export CC=$ccomp
 export CXX=$cppcomp
 export GIT_BRANCH=$fairroot_tag
 export BUILDDIR=/tmp/build_fairroot_${fairroot_tag}_fs_${fairsoft_tag}_root${root_version}
+#export BUILDDIR=/opt/fairroot/source/$fairroot_tag/build
 export SOURCEDIR=/opt/fairroot/source/$fairroot_tag
 EOF
 
@@ -64,8 +69,8 @@ cat Dart.cfg
 
 ./Dart.sh Experimental Dart.cfg
 
-#cd /tmp/build_fairroot_${fairroot_tag}_fs_$fairsoft_tag
 cd /tmp/build_fairroot_${fairroot_tag}_fs_${fairsoft_tag}_root${root_version}
+#cd /opt/fairroot/source/$fairroot_tag/build
 sed -e "s#CMAKE_INSTALL_PREFIX:PATH=/usr/local#CMAKE_INSTALL_PREFIX:PATH=/opt/fairroot/${fairroot_tag}_fs_${fairsoft_tag}_root${root_version}#" -i'' CMakeCache.txt
 . ./config.sh
 make install -j$(nproc)
