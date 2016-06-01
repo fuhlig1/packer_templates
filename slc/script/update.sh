@@ -16,5 +16,5 @@
   if [ "$distribution$version" = "ScientificCERNSLC6" ]; then
     wget http://linuxsoft.cern.ch/cern/scl/slc6-scl.repo
     cp slc6-scl.repo /etc/yum.repos.d
-    yum -y install python27 devtoolset-3
+    yum -y install python27 devtoolset-3 git19
   fi

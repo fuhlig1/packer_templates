@@ -22,6 +22,7 @@ version=$(lsb_release -rs | cut -f1 -d.)
 if [ "$distribution$version" = "ScientificCERNSLC6" ]; then
   source scl_source enable devtoolset-3
   source scl_source enable python27
+  source scl_source enable git19
 fi
 
 if [ -d /opt/compiler/gcc ]; then
