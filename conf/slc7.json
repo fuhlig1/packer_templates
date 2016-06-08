@@ -1,7 +1,7 @@
 {
  "type": "server",
- "fairsoft_tag": "RC_may16", 
- "fairroot_tag": "dev",
+ "fairsoft_tag": "may16", 
+ "fairroot_tag": "RC_v-16.06",
  "root_version": "6",
  "distribution": "slc",
  "major_version": "7", 
