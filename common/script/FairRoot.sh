@@ -29,7 +29,7 @@ fi
 mkdir -p /opt/fairroot/source
 cd /opt/fairroot/source
 
-git clone https://github.com/fuhlig1/FairRoot $fairroot_tag
+git clone https://github.com/FairRootGroup/FairRoot $fairroot_tag
 
 cd /opt/fairroot/source/$fairroot_tag
 
