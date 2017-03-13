@@ -4,7 +4,7 @@
  "fairroot_tag": "RC_v-17.03",
  "root_version": "6",
  "distribution": "fedora",
- "major_version": "21", 
+ "major_version": "25", 
  "cpus": "4",
  "memory": "4096",
  "system": "amd64"
