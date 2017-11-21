@@ -55,7 +55,7 @@ fi
 set +xv
 
 if [ $root_version -eq 5 ]; then
-  sed -e "s|build_root6=no|build_root6=no|g" -i'' automatic.conf
+  sed -e "s|build_root6=yes|build_root6=no|g" -i'' automatic.conf
 else
   sed -e "s|build_root6=no|build_root6=yes|g" -i'' automatic.conf
 fi
@@ -63,13 +63,14 @@ sed -e "s|\$PWD/installation|/opt/fairsoft/\${fairsoft_tag}_root\${root_version}
 sed -e "s|build_python=no|build_python=no|g" -i'' automatic.conf
 sed -e "s|compiler=gcc|compiler=|g" -i'' automatic.conf
 sed -e "s|compiler=|compiler=gcc|g" -i'' automatic.conf
-sed -e "s|debug=yes|debug=no|g" -i'' automatic.conf
+sed -e "s|debug=no|debug=yes|g" -i'' automatic.conf
 sed -e "s|optimize=no|optimize=yes|g" -i'' automatic.conf
+sed -e "s|debug=yes|debug=no|g" -i'' automatic.conf
 
 cat automatic.conf
 
 FC=gfortran ./configure.sh automatic.conf 2>&1 | tee Installation.log
-cd && rm -rf /opt/fairsoft/source
+#cd && rm -rf /opt/fairsoft/source
 
 if [ -n "$http_proxy" ]; then
   sed '/^http-proxy-host/d' -i'' $HOME/.subversion/servers

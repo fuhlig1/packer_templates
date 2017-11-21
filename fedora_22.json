@@ -47,7 +47,7 @@
       "boot_wait": "5s",
       "boot_command": [
         "<tab> ",
-        "linux proxy={{user `https_proxy`}} noverifyssl inst.ks=https://redmine.cbm.gsi.de/attachments/download/379/anakonda-ks-22.cfg biosdevname=0 net.ifnames=0",
+        "linux proxy={{user `https_proxy`}} noverifyssl inst.ks=https://www.dropbox.com/s/903bwjazd2cr43b/anakonda-ks-22.cfg?dl=0 biosdevname=0 net.ifnames=0",
         "<enter>"
       ],
       "ssh_wait_timeout": "60m",

@@ -1,12 +1,12 @@
 {
   "variables": {
     "HTTP_PROXY": "{{env `HTTP_PROXY`}}",
-    "HTTPS_PROXY": "{{env `HTTPS_PROXY`}}",
+    "HTTPS_PROXY": "{{env `HTTP_PROXY`}}",
     "FTP_PROXY": "{{env `FTP_PROXY`}}",
     "RSYNC_PROXY": "{{env `RSYNC_PROXY`}}",
     "NO_PROXY": "{{env `NO_PROXY`}}",
     "http_proxy": "{{env `http_proxy`}}",
-    "https_proxy": "{{env `https_proxy`}}",
+    "https_proxy": "{{env `http_proxy`}}",
     "ftp_proxy": "{{env `ftp_proxy`}}",
     "rsync_proxy": "{{env `rsync_proxy`}}",
     "no_proxy": "{{env `no_proxy`}}",
@@ -29,6 +29,7 @@
         "linux inst.ks=http://{{.HTTPIP}}:{{.HTTPPort}}/anakonda-ks-23.cfg biosdevname=0 net.ifnames=0",
         "<enter>"
       ],
+      "disk_size": "30000",
       "ssh_wait_timeout": "60m",
       "ssh_username": "fairroot",
       "ssh_password": "FairRoot",
@@ -47,9 +48,10 @@
       "boot_wait": "5s",
       "boot_command": [
         "<tab> ",
-        "linux proxy={{user `https_proxy`}} noverifyssl inst.ks=https://redmine.cbm.gsi.de/attachments/download/378/anakonda-ks-23.cfg biosdevname=0 net.ifnames=0",
+        "linux proxy={{user `http_proxy`}} noverifyssl inst.ks=https://www.dropbox.com/s/3ixq8wgdewqf1ke/anakonda-ks-23.cfg?dl=0 biosdevname=0 net.ifnames=0",
         "<enter>"
       ],
+      "disk_size": "30000",
       "ssh_wait_timeout": "60m",
       "ssh_username": "fairroot",
       "ssh_password": "FairRoot",
@@ -61,12 +63,12 @@
       "type": "shell",
       "environment_vars": [
          "HTTP_PROXY={{user `HTTP_PROXY`}}",
-         "HTTPS_PROXY={{user `HTTPS_PROXY`}}",
+         "HTTPS_PROXY={{user `HTTP_PROXY`}}",
          "FTP_PROXY={{user `FTP_PROXY`}}",
          "RSYNC_PROXY={{user `RSYNC_PROXY`}}",
          "NO_PROXY={{user `NO_PROXY`}}",
          "http_proxy={{user `http_proxy`}}",
-         "https_proxy={{user `https_proxy`}}",
+         "https_proxy={{user `http_proxy`}}",
          "ftp_proxy={{user `ftp_proxy`}}",
          "rsync_proxy={{user `rsync_proxy`}}",
          "no_proxy={{user `no_proxy`}}",

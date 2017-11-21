@@ -1,11 +1,11 @@
 {
  "type": "server",
- "fairsoft_tag": "RC_mar17", 
- "fairroot_tag": "RC_v-17.03",
+ "fairsoft_tag": "oct17", 
+ "fairroot_tag": "v-17.10a",
  "root_version": "6",
  "distribution": "opensuse",
- "major_version": "13", 
- "minor_version": "1", 
+ "major_version": "42", 
+ "minor_version": "2", 
  "cpus": "4",
  "memory": "4096",
  "system": "amd64"

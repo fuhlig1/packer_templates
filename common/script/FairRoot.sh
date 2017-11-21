@@ -26,6 +26,10 @@ if [ -d /opt/compiler/gcc ]; then
   fi
 fi
 
+if [ -e /opt/fairsoft/${fairsoft_tag}_root${root_version}/bin/cmake ]; then
+  export PATH=/opt/fairsoft/${fairsoft_tag}_root${root_version}/bin:$PATH
+fi
+
 mkdir -p /opt/fairroot/source
 cd /opt/fairroot/source
 
@@ -57,6 +61,9 @@ export GIT_BRANCH=$fairroot_tag
 export BUILDDIR=/tmp/build_fairroot_${fairroot_tag}_fs_${fairsoft_tag}_root${root_version}
 #export BUILDDIR=/opt/fairroot/source/$fairroot_tag/build
 export SOURCEDIR=/opt/fairroot/source/$fairroot_tag
+
+unset HTTP_PROXY
+unset FTP_PROXY
 EOF
 
 if [ -d /opt/compiler/gcc ]; then

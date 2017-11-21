@@ -3,8 +3,9 @@
  "fairsoft_tag": "RC_mar17", 
  "fairroot_tag": "RC_v-17.03",
  "root_version": "6",
- "distribution": "debian",
- "major_version": "8", 
+ "distribution": "ubuntu",
+ "major_version": "16", 
+ "minor_version": "10", 
  "cpus": "4",
  "memory": "4096",
  "system": "amd64"

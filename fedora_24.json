@@ -29,6 +29,7 @@
         "linux inst.ks=http://{{.HTTPIP}}:{{.HTTPPort}}/anakonda-ks-23.cfg biosdevname=0 net.ifnames=0",
         "<enter>"
       ],
+      "disk_size": "30000",
       "ssh_wait_timeout": "60m",
       "ssh_username": "fairroot",
       "ssh_password": "FairRoot",
@@ -47,9 +48,10 @@
       "boot_wait": "5s",
       "boot_command": [
         "<tab> ",
-        "linux proxy={{user `https_proxy`}} noverifyssl inst.ks=https://redmine.cbm.gsi.de/attachments/download/378/anakonda-ks-23.cfg biosdevname=0 net.ifnames=0",
+        "linux proxy={{user `http_proxy`}} noverifyssl inst.ks=https://www.dropbox.com/s/3ixq8wgdewqf1ke/anakonda-ks-23.cfg?dl=0 biosdevname=0 net.ifnames=0",      
         "<enter>"
       ],
+      "disk_size": "30000",
       "ssh_wait_timeout": "60m",
       "ssh_username": "fairroot",
       "ssh_password": "FairRoot",
