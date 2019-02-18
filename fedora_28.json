@@ -1,0 +1,86 @@
+{
+  "variables": {
+    "HTTP_PROXY": "{{env `HTTP_PROXY`}}",
+    "HTTPS_PROXY": "{{env `HTTP_PROXY`}}",
+    "FTP_PROXY": "{{env `FTP_PROXY`}}",
+    "RSYNC_PROXY": "{{env `RSYNC_PROXY`}}",
+    "NO_PROXY": "{{env `NO_PROXY`}}",
+    "http_proxy": "{{env `http_proxy`}}",
+    "https_proxy": "{{env `http_proxy`}}",
+    "ftp_proxy": "{{env `ftp_proxy`}}",
+    "rsync_proxy": "{{env `rsync_proxy`}}",
+    "no_proxy": "{{env `no_proxy`}}",
+    "build_type": "server"
+  },
+  "builders": [
+    {
+      "type": "virtualbox-iso",
+      "name": "normal",
+      "guest_os_type": "Fedora_64",
+      "iso_url": "https://download.fedoraproject.org/pub/fedora/linux/releases/28/Server/x86_64/iso/Fedora-Server-netinst-x86_64-28-1.1.iso",
+      "iso_checksum": "ea1efdc692356b3346326f82e2f468903e8da59324fdee8b10eac4fea83f23fe",
+      "iso_checksum_type": "sha256",
+      "output_directory": "base_images/output_fedora_28_{{user `build_type`}}_amd64",
+      "vm_name": "packer-fedora-28-{{user `build_type`}}-amd64",
+      "http_directory": "fedora/http",
+      "boot_wait": "5s",
+      "boot_command": [
+        "<tab> ",
+        "linux inst.ks=http://{{.HTTPIP}}:{{.HTTPPort}}/anakonda-ks-23.cfg biosdevname=0 net.ifnames=0",
+        "<enter>"
+      ],
+      "disk_size": "30000",
+      "ssh_wait_timeout": "60m",
+      "ssh_username": "fairroot",
+      "ssh_password": "FairRoot",
+      "shutdown_command": "sudo systemctl poweroff"
+    },
+    {
+      "type": "virtualbox-iso",
+      "name": "proxy",
+      "guest_os_type": "Fedora_64",
+      "iso_url": "https://download.fedoraproject.org/pub/fedora/linux/releases/28/Server/x86_64/iso/Fedora-Server-netinst-x86_64-28-1.1.iso",
+      "iso_checksum": "ea1efdc692356b3346326f82e2f468903e8da59324fdee8b10eac4fea83f23fe",
+      "iso_checksum_type": "sha256",
+      "output_directory": "base_images/output_fedora_28_{{user `build_type`}}_amd64",
+      "vm_name": "packer-fedora-28-{{user `build_type`}}-amd64",
+      "http_directory": "fedora/http",
+      "boot_wait": "5s",
+      "boot_command": [
+        "<tab> ",
+        "linux proxy={{user `http_proxy`}} noverifyssl inst.ks=https://www.dropbox.com/s/3ixq8wgdewqf1ke/anakonda-ks-23.cfg?dl=0 biosdevname=0 net.ifnames=0",
+        " modprobe.blacklist=cnic,bnx2i",
+        "<enter>"
+      ],
+      "disk_size": "30000",
+      "ssh_wait_timeout": "60m",
+      "ssh_username": "fairroot",
+      "ssh_password": "FairRoot",
+      "shutdown_command": "sudo systemctl poweroff"
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "shell",
+      "environment_vars": [
+         "HTTP_PROXY={{user `HTTP_PROXY`}}",
+         "HTTPS_PROXY={{user `HTTP_PROXY`}}",
+         "FTP_PROXY={{user `FTP_PROXY`}}",
+         "RSYNC_PROXY={{user `RSYNC_PROXY`}}",
+         "NO_PROXY={{user `NO_PROXY`}}",
+         "http_proxy={{user `http_proxy`}}",
+         "https_proxy={{user `http_proxy`}}",
+         "ftp_proxy={{user `ftp_proxy`}}",
+         "rsync_proxy={{user `rsync_proxy`}}",
+         "no_proxy={{user `no_proxy`}}",
+         "build_type={{user `build_type`}}"
+      ],
+      "execute_command": "sudo {{.Vars}} sh {{.Path}}",
+      "scripts": [
+        "fedora/script/update.sh",
+        "common/script/guestAddition.sh",
+        "fedora/script/cleanup.sh"
+      ]
+    }
+  ]
+}
