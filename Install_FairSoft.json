@@ -61,6 +61,7 @@
       ],
       "execute_command": "sudo {{.Vars}} sh {{.Path}}",
       "scripts": [
+        "{{user `distribution`}}/script/update.sh",
         "{{user `distribution`}}/script/FairSoft_Dependencies.sh",
         "common/script/install_gcc.sh",
         "common/script/FairSoft.sh",
