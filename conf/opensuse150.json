@@ -1,0 +1,11 @@
+{
+ "type": "server",
+ "fairsoft_tag": "may18", 
+ "fairroot_tag": "v18.0.5",
+ "distribution": "opensuse",
+ "major_version": "15", 
+ "minor_version": "0", 
+ "cpus": "8",
+ "memory": "8192",
+ "system": "amd64"
+}
