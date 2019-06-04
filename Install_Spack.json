@@ -1,0 +1,71 @@
+{
+  "variables": {
+    "HTTP_PROXY": "{{env `HTTP_PROXY`}}",
+    "HTTPS_PROXY": "{{env `HTTPS_PROXY`}}",
+    "FTP_PROXY": "{{env `FTP_PROXY`}}",
+    "RSYNC_PROXY": "{{env `RSYNC_PROXY`}}",
+    "NO_PROXY": "{{env `NO_PROXY`}}",
+    "http_proxy": "{{env `http_proxy`}}",
+    "https_proxy": "{{env `https_proxy`}}",
+    "ftp_proxy": "{{env `ftp_proxy`}}",
+    "rsync_proxy": "{{env `rsync_proxy`}}",
+    "no_proxy": "{{env `no_proxy`}}",
+    "fairsoft_tag": "may18",
+    "distribution": "debian",
+    "major_version": "9",
+    "minor_version": "",
+    "type": "server",
+    "memory": "8192",
+    "cpus": "8",
+    "system": "amd64"
+  },
+  "builders": [
+    {
+      "type": "docker",
+      "image": "{{user `distribution`}}:{{user `major_version`}}{{user `minor_version`}}",
+      "export_path": "{{user `distribution`}}_{{user `major_version`}}{{user `minor_version`}}_{{user `type`}}_FairSoft_{{user `fairsoft_tag`}}_root{{user `root_version`}}_{{user `system`}}.tar"
+    },
+    {
+      "type": "virtualbox-ovf",
+      "output_directory": "spack_images/output_{{user `distribution`}}_{{user `major_version`}}{{user `minor_version`}}_{{user `type`}}_Spack_{{user `fairsoft_tag`}}_{{user `system`}}",
+      "vm_name": "packer-{{user `distribution`}}{{user `major_version`}}{{user `minor_version`}}-{{user `type`}}-Spack-{{user `fairsoft_tag`}}-root{{user `root_version`}}-{{user `system`}}",
+      "source_path": "base_images/output_{{user `distribution`}}_{{user `major_version`}}{{user `minor_version`}}_{{user `type`}}_{{user `system`}}/packer-{{user `distribution`}}-{{user `major_version`}}{{user `minor_version`}}-{{user `type`}}-{{user `system`}}.ovf",
+      "ssh_username": "fairroot",
+      "ssh_password": "FairRoot",
+      "ssh_timeout": "10000s",
+      "guest_additions_mode": "disable",
+      "shutdown_command": "sudo shutdown -P now",
+      "vboxmanage": [
+        ["modifyvm", "{{.Name}}", "--memory", "{{user `memory`}}"],
+        ["modifyvm", "{{.Name}}", "--cpus", "{{user `cpus`}}"]
+      ]
+    }      
+  ],
+  "provisioners": [
+    {
+     "type": "shell",
+      "environment_vars": [
+         "HTTP_PROXY={{user `HTTP_PROXY`}}",
+         "HTTPS_PROXY={{user `HTTPS_PROXY`}}",
+         "FTP_PROXY={{user `FTP_PROXY`}}",
+         "RSYNC_PROXY={{user `RSYNC_PROXY`}}",
+         "NO_PROXY={{user `NO_PROXY`}}",
+         "http_proxy={{user `http_proxy`}}",
+         "https_proxy={{user `https_proxy`}}",
+         "ftp_proxy={{user `ftp_proxy`}}",
+         "rsync_proxy={{user `rsync_proxy`}}",
+         "no_proxy={{user `no_proxy`}}",
+         "fairsoft_tag={{user `fairsoft_tag`}}",
+         "root_version={{user `root_version`}}"
+      ],
+      "execute_command": "sudo {{.Vars}} sh {{.Path}}",
+      "scripts": [
+        "{{user `distribution`}}/script/update.sh",
+        "{{user `distribution`}}/script/Spack_Dependencies.sh",
+        "common/script/install_gcc.sh",
+        "common/script/Spack.sh",
+        "{{user `distribution`}}/script/cleanup.sh"
+      ]
+    }
+  ]
+}
