@@ -1,0 +1,13 @@
+{
+ "type": "server",
+ "fairsoft_tag": "nov15p1", 
+ "fairroot_tag": "v-15.11",
+ "cbmroot_tag": "trunk",
+ "root_version": "5",
+ "distribution": "opensuse",
+ "major_version": "tumbleweed", 
+ "minor_version": "", 
+ "cpus": "8",
+ "memory": "8192",
+ "system": "amd64"
+}
