@@ -18,20 +18,11 @@
     "type": "server",
     "memory": "4096",
     "cpus": "4",
-    "system": "amd64",
-    "docker_login": "{{env `docker_login`}}",
-    "docker_password": "{{env `docker_password`}}"
+    "system": "amd64"
   },
   "builders": [
     {
-      "type": "docker",
-      "image": "fuhlig1/{{user `distribution`}}{{user `major_version`}}{{user `minor_version`}}:base-image",
-      "commit": true
-    },
-    {
       "type": "virtualbox-ovf",
-      "output_directory": "fairsoft_images/output_{{user `distribution`}}_{{user `major_version`}}{{user `minor_version`}}_{{user `type`}}_FairSoft_{{user `fairsoft_tag`}}_root{{user `root_version`}}_{{user `system`}}",
-      "vm_name": "packer-{{user `distribution`}}{{user `major_version`}}{{user `minor_version`}}-{{user `type`}}-FairSoft-{{user `fairsoft_tag`}}-root{{user `root_version`}}-{{user `system`}}",
       "source_path": "base_images/output_{{user `distribution`}}_{{user `major_version`}}{{user `minor_version`}}_{{user `type`}}_{{user `system`}}/packer-{{user `distribution`}}-{{user `major_version`}}{{user `minor_version`}}-{{user `type`}}-{{user `system`}}.ovf",
       "ssh_username": "fairroot",
       "ssh_password": "FairRoot",
@@ -63,29 +54,8 @@
       ],
       "execute_command": "sudo {{.Vars}} sh {{.Path}}",
       "scripts": [
-        "{{user `distribution`}}/script/update.sh",
-        "{{user `distribution`}}/script/FairSoft_Dependencies.sh",
-        "common/script/install_gcc.sh",
-        "common/script/FairSoft.sh",
-        "{{user `distribution`}}/script/cleanup.sh"
+        "{{user `distribution`}}/script/Create_Docker_Image_Debootstrap.sh"
       ]
     }
-  ],
-  "post-processors": [
-    [
-      {
-        "type": "docker-import",
-        "repository": "fuhlig1/debian8",
-        "tag": "fairsoft-image",
-        "only": ["docker"]
-      },
-      {
-        "type": "docker-push",
-        "login": "true",
-        "login_username": "{{user `docker_login`}}",
-        "login_password": "{{user `docker_password`}}",
-        "only": ["docker"]
-      }
-    ]
   ]
 }

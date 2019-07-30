@@ -26,7 +26,7 @@
       "boot_wait": "5s",
       "boot_command": [
         "<tab> ",
-        "linux inst.ks=http://{{.HTTPIP}}:{{.HTTPPort}}/anakonda-ks-23.cfg biosdevname=0 net.ifnames=0",
+        "linux inst.ks=http://{{.HTTPIP}}:{{.HTTPPort}}/anakonda-ks-24.cfg biosdevname=0 net.ifnames=0",
         "<enter>"
       ],
       "disk_size": "30000",

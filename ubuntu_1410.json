@@ -1,0 +1,67 @@
+{
+  "variables": {
+    "HTTP_PROXY": "{{env `HTTP_PROXY`}}",
+    "HTTPS_PROXY": "{{env `HTTPS_PROXY`}}",
+    "FTP_PROXY": "{{env `FTP_PROXY`}}",
+    "RSYNC_PROXY": "{{env `RSYNC_PROXY`}}",
+    "NO_PROXY": "{{env `NO_PROXY`}}",
+    "http_proxy": "{{env `http_proxy`}}",
+    "https_proxy": "{{env `https_proxy`}}",
+    "ftp_proxy": "{{env `ftp_proxy`}}",
+    "rsync_proxy": "{{env `rsync_proxy`}}",
+    "no_proxy": "{{env `no_proxy`}}",
+    "build_type": "server"
+  },
+  "builders": [
+    {
+      "type": "virtualbox-iso",
+      "guest_os_type": "Ubuntu_64",
+      "iso_url": "http://old-releases.ubuntu.com/releases/14.10/ubuntu-14.10-server-amd64.iso",
+      "iso_checksum": "f79edea19575e2cabb5ff9aeca787ea821fcfdbf81ce89823c26b020d9940956",
+      "iso_checksum_type": "sha256",
+      "output_directory": "base_images/output_ubuntu_1410_{{user `build_type`}}_amd64",
+      "vm_name": "packer-ubuntu1410-{{user `build_type`}}-amd64",
+      "ssh_username": "fairroot",
+      "ssh_password": "FairRoot",
+      "ssh_timeout": "10000s",
+      "http_directory": "ubuntu/http",
+      "boot_wait": "5s",
+      "boot_command": [
+        "<esc><esc><enter><wait>",
+        "/install/vmlinuz ",
+        "preseed/url=http://{{.HTTPIP}}:{{.HTTPPort}}/preseed.cfg ",
+        "debian-installer=en_US auto locale=en_US kbd-chooser/method=us ",
+        "hostname={{.Name}} ",
+        "fb=false debconf/frontend=noninteractive ",
+        "keyboard-configuration/modelcode=SKIP keyboard-configuration/layout=USA ",
+        "keyboard-configuration/variant=USA console-setup/ask_detect=false ",
+        "initrd=/install/initrd.gz -- <enter> "
+      ],  
+      "shutdown_command": "echo 'FairRoot' | sudo -S shutdown -P now"
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "shell",
+      "environment_vars": [
+         "HTTP_PROXY={{user `HTTP_PROXY`}}",
+         "HTTPS_PROXY={{user `HTTPS_PROXY`}}",
+         "FTP_PROXY={{user `FTP_PROXY`}}",
+         "RSYNC_PROXY={{user `RSYNC_PROXY`}}",
+         "NO_PROXY={{user `NO_PROXY`}}",
+         "http_proxy={{user `http_proxy`}}",
+         "https_proxy={{user `https_proxy`}}",
+         "ftp_proxy={{user `ftp_proxy`}}",
+         "rsync_proxy={{user `rsync_proxy`}}",
+         "no_proxy={{user `no_proxy`}}",
+         "build_type={{user `build_type`}}"
+      ],
+      "execute_command": "sudo {{.Vars}} sh {{.Path}}",
+      "scripts": [
+        "ubuntu/script/update.sh",
+        "common/script/guestAddition.sh",
+        "ubuntu/script/cleanup.sh"
+      ]
+    }
+  ]  
+}    

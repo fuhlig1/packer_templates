@@ -18,15 +18,13 @@
     "type": "server",
     "memory": "4096",
     "cpus": "4",
-    "system": "amd64",
-    "docker_login": "{{env `docker_login`}}",
-    "docker_password": "{{env `docker_password`}}"
+    "system": "amd64"
   },
   "builders": [
     {
       "type": "docker",
-      "image": "fuhlig1/{{user `distribution`}}{{user `major_version`}}{{user `minor_version`}}:base-image",
-      "commit": true
+      "image": "debian:latest",
+      "export_path": "{{user `distribution`}}_{{user `major_version`}}{{user `minor_version`}}_{{user `type`}}_FairSoft_{{user `fairsoft_tag`}}_root{{user `root_version`}}_{{user `system`}}.tar"    
     },
     {
       "type": "virtualbox-ovf",
@@ -63,29 +61,11 @@
       ],
       "execute_command": "sudo {{.Vars}} sh {{.Path}}",
       "scripts": [
-        "{{user `distribution`}}/script/update.sh",
         "{{user `distribution`}}/script/FairSoft_Dependencies.sh",
         "common/script/install_gcc.sh",
         "common/script/FairSoft.sh",
         "{{user `distribution`}}/script/cleanup.sh"
       ]
     }
-  ],
-  "post-processors": [
-    [
-      {
-        "type": "docker-import",
-        "repository": "fuhlig1/debian8",
-        "tag": "fairsoft-image",
-        "only": ["docker"]
-      },
-      {
-        "type": "docker-push",
-        "login": "true",
-        "login_username": "{{user `docker_login`}}",
-        "login_password": "{{user `docker_password`}}",
-        "only": ["docker"]
-      }
-    ]
   ]
 }

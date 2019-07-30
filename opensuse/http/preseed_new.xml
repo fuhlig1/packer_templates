@@ -106,8 +106,8 @@
     <interfaces config:type="list">
       <interface>
 	<bootproto>dhcp</bootproto>
-	<device>enp0s3</device>
-	<startmode>onboot</startmode>
+	<device>eth0</device>
+	<startmode>auto</startmode>
       </interface>
       <interface>
 	<bootproto>dhcp</bootproto>

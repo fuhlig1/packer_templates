@@ -9,7 +9,7 @@
       <confirm config:type="boolean">false</confirm>
       <forceboot config:type="boolean">true</forceboot>
       <final_reboot config:type="boolean">false</final_reboot>
-    </mode>
+   </mode>
   </general>
   <report>
     <messages>
@@ -46,19 +46,19 @@
       <device>/dev/sda</device>
       <initialize config:type="boolean">true</initialize>
       <partitions config:type="list">
-	<partition>
-	  <label>boot</label>
-	  <mount>/boot</mount>
-	  <mountby config:type="symbol">label</mountby>
-	  <partition_type>primary</partition_type>
-	  <size>200M</size>
-	</partition>
-	<partition>
-	  <label>system</label>
-	  <lvm_group>system</lvm_group>
-	  <partition_type>primary</partition_type>
-	  <size>max</size>
-	</partition>
+        <partition>
+          <label>boot</label>
+          <mount>/boot</mount>
+          <mountby config:type="symbol">label</mountby>
+          <partition_type>primary</partition_type>
+          <size>200M</size>
+        </partition>
+        <partition>
+          <label>system</label>
+          <lvm_group>system</lvm_group>
+          <partition_type>primary</partition_type>
+          <size>max</size>
+        </partition>
       </partitions>
       <use>all</use>
     </drive>
@@ -67,22 +67,22 @@
       <initialize config:type="boolean">true</initialize>
       <is_lvm_vg config:type="boolean">true</is_lvm_vg>
       <partitions config:type="list">
-	<partition>
-	  <label>swap</label>
-	  <mountby config:type="symbol">label</mountby>
-	  <filesystem config:type="symbol">swap</filesystem>
-	  <lv_name>swap</lv_name>
-	  <mount>swap</mount>
-	  <size>2G</size>
-	</partition>
-	<partition>
-	  <label>root</label>
-	  <mountby config:type="symbol">label</mountby>
-	  <filesystem config:type="symbol">ext4</filesystem>
-	  <lv_name>root</lv_name>
-	  <mount>/</mount>
-	  <size>max</size>
-	</partition>
+        <partition>
+          <label>swap</label>
+          <mountby config:type="symbol">label</mountby>
+          <filesystem config:type="symbol">swap</filesystem>
+          <lv_name>swap</lv_name>
+          <mount>swap</mount>
+          <size>2G</size>
+        </partition>
+        <partition>
+          <label>root</label>
+          <mountby config:type="symbol">label</mountby>
+          <filesystem config:type="symbol">ext4</filesystem>
+          <lv_name>root</lv_name>
+          <mount>/</mount>
+          <size>max</size>
+        </partition>
       </partitions>
       <pesize>4M</pesize>
       <type config:type="symbol">CT_LVM</type>
@@ -105,14 +105,14 @@
     </dns>
     <interfaces config:type="list">
       <interface>
-	<bootproto>dhcp</bootproto>
-	<device>enp0s3</device>
-	<startmode>onboot</startmode>
+        <bootproto>dhcp</bootproto>
+        <device>enp0s3</device>
+        <startmode>onboot</startmode>
       </interface>
       <interface>
-	<bootproto>dhcp</bootproto>
-	<device>ens33</device>
-	<startmode>onboot</startmode>
+        <bootproto>dhcp</bootproto>
+        <device>ens33</device>
+        <startmode>onboot</startmode>
       </interface>
     </interfaces>
   </networking>
@@ -124,6 +124,7 @@
 
   <software>
     <image/>
+    <instsource>http://download.opensuse.org/distribution/13.2/repo/oss/</instsource>
     <do_online_update config:type="boolean">true</do_online_update>
     <kernel>kernel-default</kernel>
     <patterns config:type="list">
@@ -168,12 +169,12 @@
     <default>3</default>
     <services config:type="list">
       <service>
-	<service_name>ntp</service_name>
-	<service_status>enable</service_status>
+         <service_name>ntp</service_name>
+         <service_status>enable</service_status>
       </service>
       <service>
-	<service_name>sshd</service_name>
-	<service_status>enable</service_status>
+        <service_name>sshd</service_name>
+        <service_status>enable</service_status>
       </service>
     </services>
   </runlevel>
@@ -200,25 +201,25 @@
 
   <users config:type="list">
     <user>
-      <user_password>FairRoot</user_password>
+      <user_password>vagrant</user_password>
       <username>root</username>
     </user>
     <user>
-      <fullname>FairRoot</fullname>
+      <fullname>vagrant</fullname>
       <gid>100</gid>
-      <home>/home/fairroot</home>
+      <home>/home/vagrant</home>
       <password_settings>
-	<expire/>
-	<flag/>
-	<inact>-1</inact>
-	<max>99999</max>
-	<min>0</min>
-	<warn>7</warn>
+        <expire/>
+        <flag/>
+        <inact>-1</inact>
+        <max>99999</max>
+        <min>0</min>
+        <warn>7</warn>
       </password_settings>
       <shell>/bin/bash</shell>
       <uid>1000</uid>
-      <user_password>FairRoot</user_password>
-      <username>fairroot</username>
+      <user_password>vagrant</user_password>
+      <username>vagrant</username>
     </user>
   </users>
   <kdump>

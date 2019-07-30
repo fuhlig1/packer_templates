@@ -6,6 +6,10 @@ set -xv
 ps -p $$
 echo $SHELL
 
+date
+sudo date -s "$(curl -sD - google.com | grep '^Date:' | cut -d' ' -f3-6)Z"
+date
+
 echo "tag: $fairroot_tag"
 
 distribution=$(lsb_release -is)
@@ -14,6 +18,7 @@ version=$(lsb_release -rs | cut -f1 -d.)
 if [ "$distribution$version" = "ScientificCERNSLC6" ]; then
   source scl_source enable devtoolset-3
   source scl_source enable python27
+  source scl_source enable git19
 fi
 
 if [ -d /opt/compiler/gcc ]; then

@@ -4,6 +4,6 @@ zypper --non-interactive update
 
 zypper --non-interactive install \
           gcc gcc-c++ gcc-fortran \
-          make git subversion \
+          make git subversion patch \
           curl gzip bzip2 unzip rsync \
-          python3 python2 lsb-release
+          python python-xml lsb-release

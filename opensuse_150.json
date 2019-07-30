@@ -22,7 +22,7 @@
         "<esc><enter><wait>",
         "linux netsetup=dhcp<wait>",
         " install=http://download.opensuse.org/distribution/leap/15.0/repo/oss/ insecure=1<wait>",
-        " lang=en_US autoyast=http://{{.HTTPIP}}:{{.HTTPPort}}/preseed.xml<wait>",
+        " lang=en_US autoyast=http://{{.HTTPIP}}:{{.HTTPPort}}/preseed_new.xml<wait>",
         " textmode=1<wait>",
         "<enter><wait>"
       ],

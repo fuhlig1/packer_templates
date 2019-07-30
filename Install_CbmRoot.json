@@ -12,37 +12,31 @@
     "no_proxy": "{{env `no_proxy`}}",
     "fairsoft_tag": "jul15p2",
     "root_version": "5",
+    "fairroot_tag": "v-15.07a",
+    "cbmroot_tag": "trunk",
     "distribution": "debian",
     "major_version": "7",
     "minor_version": "",
     "type": "server",
     "memory": "4096",
     "cpus": "4",
-    "system": "amd64",
-    "docker_login": "{{env `docker_login`}}",
-    "docker_password": "{{env `docker_password`}}"
+    "system": "amd64"
   },
   "builders": [
     {
-      "type": "docker",
-      "image": "fuhlig1/{{user `distribution`}}{{user `major_version`}}{{user `minor_version`}}:base-image",
-      "commit": true
-    },
-    {
       "type": "virtualbox-ovf",
-      "output_directory": "fairsoft_images/output_{{user `distribution`}}_{{user `major_version`}}{{user `minor_version`}}_{{user `type`}}_FairSoft_{{user `fairsoft_tag`}}_root{{user `root_version`}}_{{user `system`}}",
-      "vm_name": "packer-{{user `distribution`}}{{user `major_version`}}{{user `minor_version`}}-{{user `type`}}-FairSoft-{{user `fairsoft_tag`}}-root{{user `root_version`}}-{{user `system`}}",
-      "source_path": "base_images/output_{{user `distribution`}}_{{user `major_version`}}{{user `minor_version`}}_{{user `type`}}_{{user `system`}}/packer-{{user `distribution`}}-{{user `major_version`}}{{user `minor_version`}}-{{user `type`}}-{{user `system`}}.ovf",
+      "output_directory": "cbmroot_images/output_{{user `distribution`}}_{{user `major_version`}}{{user `minor_version`}}_{{user `type`}}_FairSoft_{{user `fairsoft_tag`}}_root{{user `root_version`}}_FairRoot_{{user `fairroot_tag`}}_CbmRoot_{{user `cbmroot_tag`}}_{{user `system`}}",
+      "vm_name": "packer-{{user `distribution`}}{{user `major_version`}}{{user `minor_version`}}-{{user `type`}}-FairSoft-{{user `fairsoft_tag`}}-root{{user `root_version`}}-FairRoot-{{user `fairroot_tag`}}-{{user `system`}}",
+      "source_path": "fairroot_images/output_{{user `distribution`}}_{{user `major_version`}}{{user `minor_version`}}_{{user `type`}}_FairSoft_{{user `fairsoft_tag`}}_root{{user `root_version`}}_FairRoot_{{user `fairroot_tag`}}_{{user `system`}}/packer-{{user `distribution`}}{{user `major_version`}}{{user `minor_version`}}-{{user `type`}}-FairSoft-{{user `fairsoft_tag`}}-root{{user `root_version`}}-FairRoot-{{user `fairroot_tag`}}-{{user `system`}}.ovf",
       "ssh_username": "fairroot",
       "ssh_password": "FairRoot",
       "ssh_timeout": "10000s",
-      "guest_additions_mode": "disable",
       "shutdown_command": "sudo shutdown -P now",
       "vboxmanage": [
         ["modifyvm", "{{.Name}}", "--memory", "{{user `memory`}}"],
         ["modifyvm", "{{.Name}}", "--cpus", "{{user `cpus`}}"]
       ]
-    }      
+    }
   ],
   "provisioners": [
     {
@@ -59,33 +53,14 @@
          "rsync_proxy={{user `rsync_proxy`}}",
          "no_proxy={{user `no_proxy`}}",
          "fairsoft_tag={{user `fairsoft_tag`}}",
-         "root_version={{user `root_version`}}"
+         "fairroot_tag={{user `fairroot_tag`}}",
+         "cbmroot_tag={{user `cbmroot_tag`}}"
       ],
       "execute_command": "sudo {{.Vars}} sh {{.Path}}",
       "scripts": [
-        "{{user `distribution`}}/script/update.sh",
-        "{{user `distribution`}}/script/FairSoft_Dependencies.sh",
-        "common/script/install_gcc.sh",
-        "common/script/FairSoft.sh",
+        "common/script/CbmRoot.sh",
         "{{user `distribution`}}/script/cleanup.sh"
       ]
     }
-  ],
-  "post-processors": [
-    [
-      {
-        "type": "docker-import",
-        "repository": "fuhlig1/debian8",
-        "tag": "fairsoft-image",
-        "only": ["docker"]
-      },
-      {
-        "type": "docker-push",
-        "login": "true",
-        "login_username": "{{user `docker_login`}}",
-        "login_password": "{{user `docker_password`}}",
-        "only": ["docker"]
-      }
-    ]
   ]
 }
