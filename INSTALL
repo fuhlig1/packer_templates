@@ -1,0 +1,12 @@
+# Build base packages from ISO images
+packer build -except=normal opensuse_422.json
+
+# Install FairSoft
+packer build -except=docker -var-file=conf/ubuntu1604.json Install_FairSoft.json
+
+# Install FairRoot
+packer build -except=docker -var-file=conf/ubuntu1604.json Install_FairRoot.json
+
+# Connect to virtual machine
+
+ssh -p 3805 fairroot@localhost
