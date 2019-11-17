@@ -82,4 +82,6 @@ sed -e "s#CMAKE_INSTALL_PREFIX:PATH=/usr/local#CMAKE_INSTALL_PREFIX:PATH=/opt/fa
 . ./config.sh
 make install -j$(nproc)
 
+cd && rm -rf cd /opt/fairroot/source
+
 set +xv

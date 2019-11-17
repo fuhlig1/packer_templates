@@ -70,7 +70,7 @@ sed -e "s|debug=yes|debug=no|g" -i'' automatic.conf
 cat automatic.conf
 
 FC=gfortran ./configure.sh automatic.conf 2>&1 | tee Installation.log
-#cd && rm -rf /opt/fairsoft/source
+cd && rm -rf /opt/fairsoft/source
 
 if [ -n "$http_proxy" ]; then
   sed '/^http-proxy-host/d' -i'' $HOME/.subversion/servers
