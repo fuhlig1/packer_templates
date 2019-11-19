@@ -3,6 +3,7 @@
  "fairsoft_tag": "jun19p1", 
  "fairroot_tag": "v18.2.0",
  "root_version": "6",
+ "cbmroot_tag": "trunk",
  "distribution": "ubuntu",
  "major_version": "18", 
  "minor_version": "04", 
