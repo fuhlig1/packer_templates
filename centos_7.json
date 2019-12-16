@@ -1,0 +1,83 @@
+{
+  "variables": {
+    "HTTP_PROXY": "{{env `HTTP_PROXY`}}",
+    "HTTPS_PROXY": "{{env `HTTPS_PROXY`}}",
+    "FTP_PROXY": "{{env `FTP_PROXY`}}",
+    "RSYNC_PROXY": "{{env `RSYNC_PROXY`}}",
+    "NO_PROXY": "{{env `NO_PROXY`}}",
+    "http_proxy": "{{env `http_proxy`}}",
+    "https_proxy": "{{env `https_proxy`}}",
+    "ftp_proxy": "{{env `ftp_proxy`}}",
+    "rsync_proxy": "{{env `rsync_proxy`}}",
+    "no_proxy": "{{env `no_proxy`}}",
+    "build_type": "server"
+  },
+  "builders": [
+    {
+      "type": "virtualbox-iso",
+      "name": "normal",
+      "guest_os_type": "RedHat_64",
+      "iso_url": "http://linuxsoft.cern.ch/cern/centos/7/os/x86_64/images/boot.iso",
+      "iso_checksum": "5ef4f94136c1a710af4d0d8000d1c40a4ce9e192dc47436f03632bc49610d3d2",
+      "iso_checksum_type": "sha256",
+      "output_directory": "base_images/output_cc_7_{{user `build_type`}}_amd64",
+      "vm_name": "packer-cc7-{{user `build_type`}}-amd64",
+      "http_directory": "centos/http",
+      "boot_wait": "5s",
+      "boot_command": [
+        "<tab> ",
+        "text ks=http://{{.HTTPIP}}:{{.HTTPPort}}/kickstart-cc7.ks repo=http://linuxsoft.cern.ch/cern/centos/7/os/x86_64",
+        "<enter>"
+      ],
+      "ssh_wait_timeout": "60m",
+      "ssh_username": "fairroot",
+      "ssh_password": "FairRoot",
+      "shutdown_command": "sudo systemctl poweroff"
+    },
+    {
+      "type": "virtualbox-iso",
+      "name": "proxy",
+      "guest_os_type": "RedHat_64",
+      "iso_url": "http://linuxsoft.cern.ch/cern/centos/7/os/x86_64/images/boot.iso",
+      "iso_checksum": "5ef4f94136c1a710af4d0d8000d1c40a4ce9e192dc47436f03632bc49610d3d2",
+      "iso_checksum_type": "sha256",
+      "output_directory": "base_images/output_cc_7_{{user `build_type`}}_amd64",
+      "vm_name": "packer-cc7-{{user `build_type`}}-amd64",
+      "http_directory": "centos/http",
+      "boot_wait": "5s",
+      "boot_command": [
+        "<tab> ",
+        "text proxy={{user `https_proxy`}} noverifyssl ks=https://redmine.cbm.gsi.de/attachments/download/1154/kickstart-cc7.ks  repo=http://linuxsoft.cern.ch/cern/centos/7/os/x86_64",
+        "<enter>"
+      ],
+      "ssh_wait_timeout": "60m",
+      "ssh_username": "fairroot",
+      "ssh_password": "FairRoot",
+      "shutdown_command": "sudo systemctl poweroff"
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "shell",
+      "environment_vars": [
+         "HTTP_PROXY={{user `HTTP_PROXY`}}",
+         "HTTPS_PROXY={{user `HTTPS_PROXY`}}",
+         "FTP_PROXY={{user `FTP_PROXY`}}",
+         "RSYNC_PROXY={{user `RSYNC_PROXY`}}",
+         "NO_PROXY={{user `NO_PROXY`}}",
+         "http_proxy={{user `http_proxy`}}",
+         "https_proxy={{user `https_proxy`}}",
+         "ftp_proxy={{user `ftp_proxy`}}",
+         "rsync_proxy={{user `rsync_proxy`}}",
+         "no_proxy={{user `no_proxy`}}",
+         "build_type={{user `build_type`}}"
+      ],
+      "execute_command": "sudo {{.Vars}} sh {{.Path}}",
+      "scripts": [
+        "centos/script/update.sh",
+        "common/script/guestAddition.sh",
+        "centos/script/cleanup.sh"
+      ]
+    }
+  ]
+}
