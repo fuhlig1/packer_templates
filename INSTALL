@@ -10,3 +10,19 @@ packer build -except=docker -var-file=conf/ubuntu1604.json Install_FairRoot.json
 # Connect to virtual machine
 
 ssh -p 3805 fairroot@localhost
+
+# Extract root file system from virtual machine disk
+# Mount the device which contain the root filesystem to /
+# The name of the device is different for different OS
+guestfish -a packer-debian-8-server-amd64-disk1.vmdk --ro
+><fs> run
+><fs> list-filesystems
+  /dev/sda1: ext2
+  /dev/sda2: unknown
+  /dev/debian-vg/root: ext4
+  /dev/debian-vg/swap_1: swap
+><fs> mount /dev/debian-vg/root /
+><fs> tar-out / - | xz >>  debian.xz
+
+# Import the root filesystem to docker
+cat debian8.xz | docker import - debian8
