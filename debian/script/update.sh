@@ -18,4 +18,8 @@ fi
 if [ ! -d /lustre ]; then
   mkdir -p /lustre;
 fi
+
+if [ ! -d /cvmfs ]; then
+  mkdir -p /cvmfs;
+fi
       

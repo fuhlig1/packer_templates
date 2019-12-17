@@ -7,7 +7,7 @@ DEBIAN_FRONTEND=noninteractive apt-get -y install \
                    g++ gcc gfortran \
                    make git subversion \
                    curl zip bzip2 unzip rsync \
-		   python
+		   python tar gnupg
 
 DEBIAN_FRONTEND=noninteractive apt-get -y clean
 DEBIAN_FRONTEND=noninteractive apt-get -y autoremove
