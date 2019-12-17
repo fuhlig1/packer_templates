@@ -59,6 +59,7 @@
       ],
       "execute_command": "sudo {{.Vars}} sh {{.Path}}",
       "scripts": [
+        "{{user `distribution`}}/script/update.sh",
         "common/script/CbmRoot.sh",
         "{{user `distribution`}}/script/cleanup.sh"
       ]
