@@ -149,6 +149,14 @@ fairroot ALL=(ALL) NOPASSWD: ALL
 EOF
 chmod 440 /etc/sudoers.d/fairroot
 
+mkdir -p /etc/systemd/network
+ln -sf /dev/null /etc/systemd/network/99-default.link
+cat > /etc/sysconfig/network-scripts/ifcfg-eth0 <<EOF
+DEVICE="eth0"
+BOOTPROTO="dhcp"
+ONBOOT="yes"
+TYPE="Ethernet"
+EOF
 
 # Done
 exit 0
