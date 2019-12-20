@@ -40,23 +40,27 @@ set -xv
 mkdir -p /opt/spack/source
 cd /opt/spack/source
 
-git clone https://github.com/spack/spack
-cd spack
-git checkout develop
-export PATH=$PATH:$PWD/bin
-cd ..
-git clone https://github.com/fuhlig1/FairSoft-Spack 
-cd FairSoft-Spack 
-git checkout $fairsoft_tag
-cd ..
-spack repo add $PWD/FairSoft-Spack
 
+#git clone -b dev_new_spack https://github.com/FairRootGroup/FairSoft
+git clone -b dev_new_spack https://github.com/fuhlig1/FairSoft
+cd FairSoft
+git submodule update --init
+
+source spack/share/spack/setup-env.sh
+
+mkdir -p ~/.spack
 spack config get config > ~/.spack/config.yaml
 sed -e "s#\$spack/opt/spack#/opt/spack#g" -i'' ~/.spack/config.yaml
 sed -e '/  - $tempdir/ d' -i'' ~/.spack/config.yaml
 
+spack -C ./config bootstrap
+
+spack repo add .
+
 export FORCE_UNSAFE_CONFIGURE=1
-spack install fairsoft
+spack -C env create jun19 env/jun19/sim_python_threads.yaml
+spack env activate jun19
+spack -C ./config install
 
 if [ -n "$http_proxy" ]; then
   sed '/^http-proxy-host/d' -i'' $HOME/.subversion/servers
